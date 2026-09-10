@@ -1,0 +1,69 @@
+<html>
+<head>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+</head>
+
+<body style="margin: 0; overflow: hidden;">
+
+    <!-- HUD para mostrar distância -->
+    <div id="hud"
+        style="position: fixed; top: 10px; left: 10px; color: white; font-size: 22px; z-index: 999;">
+        Calculando distância...
+    </div>
+
+    <a-scene
+        vr-mode-ui="enabled: false"
+        embedded
+        arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;"
+    >
+
+        <!-- Câmera -->
+        <a-camera gps-camera rotation-reader></a-camera>
+
+        <!-- Objeto GPS -->
+
+        <a-entity id="objeto"
+            gps-entity-place="latitude: -20.541335; longitude: -47.454255; altitude: 115">
+            <a-gltf-model src="../glb/wtc_3.glb" scale="1 1 1" rotation="0 45 0"></a-gltf-model>
+        </a-entity>
+
+    </a-scene>
+
+    <script>
+        // Função para calcular distância entre duas coordenadas (Haversine)
+        function calcularDistancia(lat1, lon1, lat2, lon2) {
+            const R = 6371e3; // raio da Terra em metros
+            const toRad = x => x * Math.PI / 180;
+
+            const dLat = toRad(lat2 - lat1);
+            const dLon = toRad(lon2 - lon1);
+
+            const a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+            return R * c; // distância em metros
+        }
+
+        // Atualiza distância sempre que o GPS muda
+        window.addEventListener('gps-camera-update-position', e => {
+            const userLat = e.detail.position.latitude;
+            const userLon = e.detail.position.longitude;
+
+            const objeto = document.querySelector('#objeto');
+            const objLat = objeto.components['gps-entity-place'].attrValue.latitude;
+            const objLon = objeto.components['gps-entity-place'].attrValue.longitude;
+
+            const distancia = calcularDistancia(userLat, userLon, objLat, objLon);
+
+            document.getElementById('hud').innerHTML =
+                "Distância até o objeto: " + distancia.toFixed(1) + " m";
+        });
+    </script>
+
+</body>
+</html>
