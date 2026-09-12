@@ -8,24 +8,73 @@
     <link rel="shortcut icon" href="../vr-glasses.ico" type="image/x-icon">
 </head>
 
-<body style="margin: 0; overflow: hidden;">
 
-    <a-scene vr-mode-ui="enabled: false" embedded
-        arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;">
+    <style>
+        #ui {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 9999;
+            background: rgba(0,0,0,0.5);
+            padding: 10px;
+            border-radius: 8px;
+            color: white;
+            font-family: Arial;
+        }
 
+        #ui button, #ui select {
+            margin: 4px;
+            padding: 6px 10px;
+        }
+    </style>
+</head>
 
-        <a-marker type="pattern" url="marker.patt">
-            <a-entity>
-                <a-gltf-model src="./construcao/casa_modelo_2.glb" scale="0.02 0.02 0.02" rotation="0 0 0"
-                    position="-90 0 0"></a-gltf-model>
-            </a-entity>
-        </a-marker>
+<body>
 
-        <!-- Câmera normal -->
-        <a-entity camera></a-entity>
+<div id="ui">
+    <select id="modelSelect">
+        <option value="../construcao/casa_modelo_1.glb">Casa Modelo 1</option>
+        <option value="../construcao/casa_modelo_2.glb" selected>Casa Modelo 2</option>
+        <option value="../construcao/casa_modelo_3.glb">Casa Modelo 3</option>
+    </select>
+    <br>
 
-    </a-scene>
+    <button id="rotateLeft">Rot Y ←</button>
+    <button id="rotateRight">Rot Y →</button>
+    <br>
+
+    <button id="tiltForward">Pitch ↑</button>
+    <button id="tiltBackward">Pitch ↓</button>
+    <br>
+
+    <button id="rollLeft">Roll ←</button>
+    <button id="rollRight">Roll →</button>
+    <br>
+
+    <button id="moveUp">Mover ↑</button>
+    <button id="moveDown">Mover ↓</button>
+    <br>
+
+    <button id="zoomIn">Zoom +</button>
+    <button id="zoomOut">Zoom -</button>
+</div>
+
+<a-scene vr-mode-ui="enabled: false" embedded
+         arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;">
+
+    <a-marker type="pattern" url="marker.patt">
+        <a-entity id="objeto">
+            <a-gltf-model id="modelo"
+                          src="../construcao/casa_modelo_2.glb"
+                          scale="1 1 1" position="0 0 0">
+            </a-gltf-model>
+        </a-entity>
+    </a-marker>
+
+    <a-entity camera></a-entity>
+</a-scene>
+
+<script src="app.js"></script>
 
 </body>
-
 </html>
