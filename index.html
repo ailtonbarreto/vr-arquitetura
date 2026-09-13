@@ -21,21 +21,20 @@
 
         <span class="material-symbols-outlined" id="close_menu">close</span>
 
-        <select id="modelSelect">
+        <div id="modelButtons">
 
-            <option value="">Selecione um modelo</option>
+            <button class="model-btn" data-src="./construcao/edificio_1.glb">Edifício 1</button>
+            <button class="model-btn" data-src="./construcao/edificio_2.glb">Edifício 2</button>
+            <button class="model-btn" data-src="./construcao/casa_modelo_1.glb">Casa Modelo 1</button>
+            <button class="model-btn" data-src="./construcao/casa_modelo_2.glb">Casa Modelo 2</button>
+            <button class="model-btn" data-src="./construcao/casa_modelo_3.glb">Casa Modelo 3</button>
+            <button class="model-btn" data-src="./construcao/eiffel_tower.glb">Torre Eiffel</button>
+            <button class="model-btn" data-src="./construcao/wtc.glb">World Trade Center</button>
+            <button class="model-btn" data-src="./construcao/Burj_al_arab.glb">Burj Al Arab</button>
 
-            <option value="./construcao/edificio_1.glb">Edificio 1</option>
-            <option value="./construcao/edificio_2.glb">Edificio 2</option>
-            <option value="./construcao/casa_modelo_1.glb">Casa Modelo 1</option>
-            <option value="./construcao/casa_modelo_2.glb">Casa Modelo 2</option>
-            <option value="./construcao/casa_modelo_3.glb">Casa Modelo 3</option>
-            <option value="./construcao/eiffel_tower.glb">Torre Eiffel</option>
-            <option value="./construcao/wtc.glb">World Trade Center</option>
-            <option value="./construcao/Burj_al_arab.glb">Burj Al Arab</option>
-  
+        </div>
 
-        </select>
+    </nav>
 
 
     </nav>
@@ -81,7 +80,7 @@
 
     <!----------------------------------------------------------------------------->
 
-    <a-scene vr-mode-ui="enabled: false" embedded
+    <a-scene vr-mode-ui="enabled: true" embedded
         arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;">
 
         <a-entity id="objeto" position="0 1 -4" rotation="0 -90 0">
@@ -96,7 +95,6 @@
     </a-scene>
 
     <script>
-
         let dragging = false;
         let pinchStartDistance = 0;
         let initialScale = 2;
@@ -104,18 +102,16 @@
         const objeto = document.querySelector("#objeto").object3D;
         const modelo = document.querySelector("#modelo");
 
+        /* AUTO AJUSTE AO CARREGAR MODELO */
         modelo.addEventListener("model-loaded", () => {
+
             // Resetar posição
             objeto.position.set(0, 1, -4);
 
             // Resetar rotação
-            objeto.rotation.set(
-                0,
-                THREE.Math.degToRad(-90),
-                0
-            );
+            objeto.rotation.set(0, THREE.Math.degToRad(-90), 0);
 
-            // Resetar escala
+            // Resetar escala inicial
             modelo.setAttribute("scale", { x: 2, y: 2, z: 2 });
 
             // Ajuste automático baseado no tamanho real do modelo
@@ -136,8 +132,7 @@
             });
         });
 
-
-        /* ZOOM */
+        /* ZOOM TOUCH */
         function getPinchDistance(e) {
             const dx = e.touches[0].clientX - e.touches[1].clientX;
             const dy = e.touches[0].clientY - e.touches[1].clientY;
@@ -193,7 +188,6 @@
         document.querySelector("#rotateLeft").addEventListener("click", () => {
             objeto.rotation.y += THREE.Math.degToRad(5);
         });
-
         document.querySelector("#rotateRight").addEventListener("click", () => {
             objeto.rotation.y -= THREE.Math.degToRad(5);
         });
@@ -202,86 +196,64 @@
         document.querySelector("#moveUp").addEventListener("click", () => {
             objeto.position.y += 0.2;
         });
-
         document.querySelector("#moveDown").addEventListener("click", () => {
             objeto.position.y -= 0.2;
         });
 
-        /* PITCH (X) */
+        /* PITCH X */
         document.querySelector("#tiltForward").addEventListener("click", () => {
             objeto.rotation.x += THREE.Math.degToRad(5);
         });
-
         document.querySelector("#tiltBackward").addEventListener("click", () => {
             objeto.rotation.x -= THREE.Math.degToRad(5);
         });
 
-        /* ROLL (Z) — ARFAGEM REAL */
+        /* ROLL Z */
         document.querySelector("#rollRight").addEventListener("click", () => {
             objeto.rotation.z += THREE.Math.degToRad(5);
         });
-
         document.querySelector("#rollLeft").addEventListener("click", () => {
             objeto.rotation.z -= THREE.Math.degToRad(5);
         });
 
-        /* ZOOM DESKTOP (botões + e -) */
+        /* ZOOM DESKTOP */
         document.querySelector("#zoomIn").addEventListener("click", () => {
             let scale = modelo.getAttribute("scale").x;
-            scale += scale * 0.15; // aumenta 15%
+            scale += scale * 0.15;
             modelo.setAttribute("scale", { x: scale, y: scale, z: scale });
         });
 
         document.querySelector("#zoomOut").addEventListener("click", () => {
             let scale = modelo.getAttribute("scale").x;
-            scale -= scale * 0.15; // diminui 15%
-            if (scale < 0.0001) scale = 0.0001; // limite mínimo
+            scale -= scale * 0.15;
+            if (scale < 0.0001) scale = 0.0001;
             modelo.setAttribute("scale", { x: scale, y: scale, z: scale });
         });
 
+        /* BOTÕES DE MODELO */
+        const modelButtons = document.querySelectorAll(".model-btn");
 
-        document.querySelector("#modelSelect").addEventListener("change", (e) => {
-            const newModelURL = e.target.value;
+        modelButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
 
+                // Remove active de todos
+                modelButtons.forEach(b => b.classList.remove("active"));
 
-            modelo.addEventListener("model-loaded", () => {
-                const obj = modelo.getObject3D("mesh");
-                if (!obj) return;
+                // Adiciona active ao botão clicado
+                btn.classList.add("active");
 
+                // Pega o src do botão
+                const newModelURL = btn.dataset.src;
 
-                const box = new THREE.Box3().setFromObject(obj);
-                const size = box.getSize(new THREE.Vector3());
+                // Troca o GLB
+                modelo.setAttribute("src", newModelURL);
 
-
-                const maxDim = Math.max(size.x, size.y, size.z);
-
-
-                const desiredSize = 3;
-
-                const scaleFactor = desiredSize / maxDim;
-
-
-                modelo.setAttribute("scale", {
-                    x: scaleFactor,
-                    y: scaleFactor,
-                    z: scaleFactor
-                });
+                // Resetar transformações
+                objeto.rotation.set(0, THREE.Math.degToRad(-90), 0);
+                objeto.position.set(0, 1, -4);
+                modelo.setAttribute("scale", { x: 2, y: 2, z: 2 });
             });
-
-
-            // troca o GLB
-            modelo.setAttribute("src", newModelURL);
-
-            // opcional: resetar escala ao trocar
-            modelo.setAttribute("scale", { x: 2, y: 2, z: 2 });
-
-            // opcional: resetar rotação
-            objeto.rotation.set(0, -90 * Math.PI / 180, 0);
-
-            // opcional: resetar posição
-            objeto.position.set(0, 1, -4);
         });
-
 
     </script>
 

@@ -15,6 +15,7 @@ body {
     left: 1.5rem;
     transform: translateX(-50%);
     display: flex;
+    justify-content: space-between;
     gap: 20px;
     z-index: 9999;
     cursor: pointer;
@@ -33,22 +34,6 @@ body {
     cursor: pointer;
 }
 
-select {
-    width: 90%;
-    padding: 0.5rem;
-    background-color: rgba(0, 0, 0, 0.062);
-}
-
-.opcoes {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 9999;
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-}
 
 .controls_rolagem {
     position: fixed;
@@ -100,7 +85,7 @@ select {
 #ocultar,
 #mostrar {
     position: fixed;
-    right: 15px;
+    left: 15px;
     bottom: 15px;
     transform: translateY(-50%);
     display: flex;
@@ -123,4 +108,28 @@ select {
 
 .btn:active {
     background: rgba(0, 0, 0, 0.9);
+}
+
+.model-btn {
+    display: block;
+    width: 220px;
+    padding: 10px;
+    margin: 6px 0;
+    background: #838383;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.model-btn:hover {
+    background: #333;
+}
+
+.model-btn.active {
+    background: #05db0c;
+    color: white;
+    font-weight: bold;
 }
