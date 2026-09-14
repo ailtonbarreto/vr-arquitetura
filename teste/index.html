@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../menu.css">
+
+    <script src="../menu.js" defer></script>
+    <script src="../hide.js" defer></script>
+    <script src="script.js" defer></script>
+
+    <title>AR Imersivo Arquitetura</title>
+</head>
+
+<body style="margin:0; overflow:hidden;">
+
+    <!-- MENU -->
+    <span class="material-symbols-outlined open-menu" id="open_menu">menu</span>
+
+    <nav id="menu">
+        <span class="material-symbols-outlined" id="close_menu">close</span>
+
+        <div id="modelButtons">
+            <button class="model-btn" data-src="../construcao/edificio_1.glb">Edifício 1</button>
+            <button class="model-btn" data-src="../construcao/edificio_2.glb">Edifício 2</button>
+            <button class="model-btn" data-src="../construcao/casa_modelo_1.glb">Casa Modelo 1</button>
+            <button class="model-btn" data-src="../construcao/casa_modelo_2.glb">Casa Modelo 2</button>
+            <button class="model-btn" data-src="../construcao/eiffel_tower.glb">Torre Eiffel</button>
+            <button class="model-btn" data-src="../construcao/wtc.glb">World Trade Center</button>
+            <button class="model-btn" data-src="../construcao/Burj_al_arab.glb">Burj Al Arab</button>
+        </div>
+    </nav>
+
+    <!-- CONTROLES -->
+    <div class="controls-zoom">
+        <div class="btn" id="zoomIn">＋</div>
+        <div class="btn" id="zoomOut">－</div>
+    </div>
+
+    <div class="controls-bottom">
+        <div class="btn" id="rotateRight">◀️</div>
+        <div class="btn" id="rotateLeft">▶️</div>
+    </div>
+
+    <div class="controls_rolagem">
+        <div class="btn" id="rollLeft">🔽</div>
+        <div class="btn" id="rollRight">🔼</div>
+    </div>
+
+    <div class="controls-leftside">
+        <div class="btn" id="tiltForward">🔼</div>
+        <div class="btn" id="tiltBackward">🔽</div>
+    </div>
+
+    <div class="controls-side">
+        <div class="btn" id="moveUp">🔼</div>
+        <div class="btn" id="moveDown">🔽</div>
+    </div>
+
+    <!-- CENA AR IMERSIVA -->
+    <a-scene
+        xr-mode="immersive-ar"
+        webxr="optionalFeatures: hit-test;"
+        renderer="colorManagement: true; physicallyCorrectLights: true;"
+        vr-mode-ui="enabled: false">
+
+        <!-- Luz -->
+        <a-entity light="type: directional; intensity: 1" position="1 1 1"></a-entity>
+
+        <!-- Modelo fixo no mundo real -->
+        <a-entity id="objeto" position="0 0 -2" rotation="0 0 0">
+            <a-gltf-model id="modelo" src="" scale="1 1 1"></a-gltf-model>
+        </a-entity>
+
+        <!-- Câmera AR real -->
+        <a-entity camera></a-entity>
+
+    </a-scene>
+
+</body>
+</html>
