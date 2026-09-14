@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="menu.css">
     <script src="menu.js" defer></script>
     <script src="hide.js" defer></script>
+    <script src="script.js" defer></script>
     <link rel="shortcut icon" href="vr-glasses.ico" type="image/x-icon">
     <title>VR Arquitetura</title>
 </head>
@@ -33,8 +34,36 @@
 
         </div>
 
-    </nav>
+    </nav> 
 
+    <div id="voltar" onclick="window.location.href='index.html'">← Voltar</div>
+
+    <a-scene vr-mode-ui="enabled: true">
+
+        <!-- Modelo fixo no mundo VR -->
+        <a-entity id="objeto" position="0 0 0" rotation="0 0 0">
+            <a-gltf-model id="modelo" src="" scale="1 1 1"></a-gltf-model>
+        </a-entity>
+
+        <!-- Câmera VR com movimento -->
+        <a-entity id="cameraRig" movement-controls="speed: 0.15" position="0 1.6 3">
+
+            <a-entity camera look-controls="pointerLockEnabled: true">
+            </a-entity>
+
+        </a-entity>
+
+    </a-scene>
+
+    <script>
+        // Pega o modelo enviado pela cena AR
+        const params = new URLSearchParams(window.location.search);
+        const src = params.get("model");
+
+        if (src) {
+            document.querySelector("#modelo").setAttribute("src", src);
+        }
+    </script>
 
 
     <div class="controls-zoom hide">
@@ -92,7 +121,7 @@
 
     </a-scene>
 
-    <script>
+    <!-- <script>
         let dragging = false;
         let pinchStartDistance = 0;
         let initialScale = 2;
@@ -100,7 +129,6 @@
         const objeto = document.querySelector("#objeto").object3D;
         const modelo = document.querySelector("#modelo");
 
-        /* AUTO AJUSTE AO CARREGAR MODELO */
         modelo.addEventListener("model-loaded", () => {
 
             // Resetar posição
@@ -184,34 +212,34 @@
 
         /* ROT Y */
         document.querySelector("#rotateLeft").addEventListener("click", () => {
-            objeto.rotation.y += THREE.Math.degToRad(5);
+            objeto.rotation.y += THREE.Math.degToRad(3);
         });
         document.querySelector("#rotateRight").addEventListener("click", () => {
-            objeto.rotation.y -= THREE.Math.degToRad(5);
+            objeto.rotation.y -= THREE.Math.degToRad(3);
         });
 
         /* MOVE Y */
         document.querySelector("#moveUp").addEventListener("click", () => {
-            objeto.position.y += 0.2;
+            objeto.position.y += 0.1;
         });
         document.querySelector("#moveDown").addEventListener("click", () => {
-            objeto.position.y -= 0.2;
+            objeto.position.y -= 0.1;
         });
 
         /* PITCH X */
         document.querySelector("#tiltForward").addEventListener("click", () => {
-            objeto.rotation.x += THREE.Math.degToRad(5);
+            objeto.rotation.x += THREE.Math.degToRad(3);
         });
         document.querySelector("#tiltBackward").addEventListener("click", () => {
-            objeto.rotation.x -= THREE.Math.degToRad(5);
+            objeto.rotation.x -= THREE.Math.degToRad(3);
         });
 
         /* ROLL Z */
         document.querySelector("#rollRight").addEventListener("click", () => {
-            objeto.rotation.z += THREE.Math.degToRad(5);
+            objeto.rotation.z += THREE.Math.degToRad(3);
         });
         document.querySelector("#rollLeft").addEventListener("click", () => {
-            objeto.rotation.z -= THREE.Math.degToRad(5);
+            objeto.rotation.z -= THREE.Math.degToRad(3);
         });
 
         /* ZOOM DESKTOP */
@@ -253,7 +281,7 @@
             });
         });
 
-    </script>
+    </script> -->
 
 </body>
 
