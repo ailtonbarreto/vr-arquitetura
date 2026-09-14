@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 
 <head>
     <meta charset="UTF-8" />
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="../style.css">
@@ -13,13 +12,14 @@
     <script src="../hide.js" defer></script>
     <script src="script.js" defer></script>
 
-    <title>AR Imersivo Arquitetura</title>
+    <link rel="shortcut icon" href="vr-glasses.ico" type="image/x-icon">
+    <title>VR Arquitetura</title>
 </head>
 
-<body style="margin:0; overflow:hidden;">
+<body>
 
     <!-- MENU -->
-    <span class="material-symbols-outlined open-menu" id="open_menu">menu</span>
+    <span class="material-symbols-outlined open-menu hide" id="open_menu">menu</span>
 
     <nav id="menu">
         <span class="material-symbols-outlined" id="close_menu">close</span>
@@ -35,51 +35,73 @@
         </div>
     </nav>
 
+    <!-- VOLTAR -->
+    <div id="voltar"
+         onclick="window.location.href='index.html'"
+         style="position: fixed; top:30px; right:100px; color:white; z-index: 100;">
+        ← Voltar
+    </div>
+
     <!-- CONTROLES -->
-    <div class="controls-zoom">
+    <div class="controls-zoom hide">
         <div class="btn" id="zoomIn">＋</div>
         <div class="btn" id="zoomOut">－</div>
     </div>
 
-    <div class="controls-bottom">
+    <div class="controls-bottom hide">
         <div class="btn" id="rotateRight">◀️</div>
         <div class="btn" id="rotateLeft">▶️</div>
     </div>
 
-    <div class="controls_rolagem">
+    <div class="controls_rolagem hide">
         <div class="btn" id="rollLeft">🔽</div>
         <div class="btn" id="rollRight">🔼</div>
     </div>
 
-    <div class="controls-leftside">
+    <div class="controls-leftside hide">
         <div class="btn" id="tiltForward">🔼</div>
         <div class="btn" id="tiltBackward">🔽</div>
     </div>
 
-    <div class="controls-side">
+    <div class="controls-side hide">
         <div class="btn" id="moveUp">🔼</div>
         <div class="btn" id="moveDown">🔽</div>
     </div>
 
-    <!-- CENA AR IMERSIVA -->
-    <a-scene
-        xr-mode="immersive-ar"
-        webxr="optionalFeatures: hit-test;"
-        renderer="colorManagement: true; physicallyCorrectLights: true;"
-        vr-mode-ui="enabled: false">
+    <div class="controls-zoom">
+        <div class="material-symbols-outlined" id="ocultar">visibility_off</div>
+        <div class="material-symbols-outlined" id="mostrar" style="display: none;">visibility</div>
+    </div>
 
-        <!-- Luz -->
-        <a-entity light="type: directional; intensity: 1" position="1 1 1"></a-entity>
+    <!-- CENA VR ÚNICA (SEM AR.JS) -->
+    <a-scene vr-mode-ui="enabled: true">
 
-        <!-- Modelo fixo no mundo real -->
-        <a-entity id="objeto" position="0 0 -2" rotation="0 0 0">
+        <!-- Modelo fixo no mundo VR -->
+        <a-entity id="objeto" position="0 0 0" rotation="0 0 0">
             <a-gltf-model id="modelo" src="" scale="1 1 1"></a-gltf-model>
         </a-entity>
 
-        <!-- Câmera AR real -->
-        <a-entity camera></a-entity>
+        <!-- Câmera VR com movimento -->
+        <a-entity id="cameraRig"
+                  movement-controls="speed: 0.15"
+                  position="0 1.6 3">
+
+            <a-entity camera look-controls="pointerLockEnabled: true"></a-entity>
+
+        </a-entity>
 
     </a-scene>
 
+    <!-- RECEBE O MODELO DA CENA AR -->
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const src = params.get("model");
+
+        if (src) {
+            document.querySelector("#modelo").setAttribute("src", src);
+        }
+    </script>
+
 </body>
+
 </html>
