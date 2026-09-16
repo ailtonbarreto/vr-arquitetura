@@ -8,8 +8,18 @@
     <link rel="shortcut icon" href="../vr-glasses.ico" type="image/x-icon">
 </head>
 
-
     <style>
+
+        *{
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            overflow: hidden;
+        }
+
         #ui {
             position: fixed;
             top: 10px;
@@ -41,22 +51,20 @@
 
     <button id="rotateLeft">Rot Y ←</button>
     <button id="rotateRight">Rot Y →</button>
+
     <br>
 
-    <button id="tiltForward">Pitch ↑</button>
-    <button id="tiltBackward">Pitch ↓</button>
-    <br>
 
     <button id="rollLeft">Roll ←</button>
     <button id="rollRight">Roll →</button>
     <br>
 
-    <button id="moveUp">Mover ↑</button>
-    <button id="moveDown">Mover ↓</button>
+    <button id="moveUp">Acima</button>
+    <button id="moveDown">Abaixo</button>
     <br>
 
-    <button id="zoomIn">Zoom +</button>
-    <button id="zoomOut">Zoom -</button>
+    <button id="zoomIn">Aumentar</button>
+    <button id="zoomOut">Diminuir</button>
 </div>
 
 <a-scene vr-mode-ui="enabled: false" embedded
@@ -65,8 +73,8 @@
     <a-marker type="pattern" url="marker.patt">
         <a-entity id="objeto">
             <a-gltf-model id="modelo"
-                          src="../construcao/casa_modelo_2.glb"
-                          scale="1 1 1" position="0 0 0">
+                          src="../construcao/edificio_1.glb" scale="0.0009 0.0009 0.0009" rotation="0 0 0"
+                    position="0 0 0">
             </a-gltf-model>
         </a-entity>
     </a-marker>

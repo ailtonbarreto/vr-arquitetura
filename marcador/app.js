@@ -9,7 +9,7 @@ const modelo = document.querySelector("#modelo");
 modelo.addEventListener("model-loaded", () => {
 
     // Resetar posição
-    objeto.position.set(0, 1, -4);
+    objeto.position.set(0, 0, 0);
 
     // Resetar rotação
     objeto.rotation.set(0, THREE.Math.degToRad(-90), 0);
@@ -108,13 +108,7 @@ document.querySelector("#moveDown").addEventListener("click", () => {
     objeto.position.y -= 0.2;
 });
 
-/* PITCH X */
-document.querySelector("#tiltForward").addEventListener("click", () => {
-    objeto.rotation.x += THREE.Math.degToRad(5);
-});
-document.querySelector("#tiltBackward").addEventListener("click", () => {
-    objeto.rotation.x -= THREE.Math.degToRad(5);
-});
+
 
 /* ROLL Z */
 document.querySelector("#rollRight").addEventListener("click", () => {
@@ -145,6 +139,6 @@ document.querySelector("#modelSelect").addEventListener("change", (e) => {
     modelo.setAttribute("src", newModelURL);
 
     objeto.rotation.set(0, THREE.Math.degToRad(-90), 0);
-    objeto.position.set(0, 1, -4);
+    objeto.position.set(0, 0, 0);
     modelo.setAttribute("scale", { x: 2, y: 2, z: 2 });
 });
