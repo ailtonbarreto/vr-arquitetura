@@ -8,20 +8,15 @@ const modelo = document.querySelector("#modelo");
 /* AUTO AJUSTE AO CARREGAR MODELO */
 modelo.addEventListener("model-loaded", () => {
 
-    // Resetar posição
     objeto.position.set(0, 0, 0);
-
-    // Resetar rotação
     objeto.rotation.set(0, THREE.Math.degToRad(-90), 0);
 
-    // Resetar escala inicial
     modelo.setAttribute("scale", { x: 2, y: 2, z: 2 });
 
-    // Ajuste automático baseado no tamanho real do modelo
-    const obj = modelo.getObject3D("mesh");
-    if (!obj) return;
+    const mesh = modelo.getObject3D("mesh");
+    if (!mesh) return;
 
-    const box = new THREE.Box3().setFromObject(obj);
+    const box = new THREE.Box3().setFromObject(mesh);
     const size = box.getSize(new THREE.Vector3());
     const maxDim = Math.max(size.x, size.y, size.z);
 
@@ -73,23 +68,16 @@ window.addEventListener("touchmove", e => {
         return;
     }
 
-    // DRAG COM UM DEDO
+    // DRAG COM UM DEDO (MOVER NO MARCADOR)
     if (!dragging || e.touches.length !== 1) return;
 
     const touch = e.touches[0];
+
     const xNorm = (touch.clientX / window.innerWidth) * 2 - 1;
+    const yNorm = (touch.clientY / window.innerHeight) * 2 - 1;
 
-    const camera = document.querySelector("a-camera").object3D;
-
-    const vector = new THREE.Vector3(xNorm, 0, -1);
-    vector.unproject(camera);
-
-    const distance = 3;
-    const dir = vector.sub(camera.position).normalize();
-    const newPos = camera.position.clone().add(dir.multiplyScalar(distance));
-
-    objeto.position.x = newPos.x;
-    objeto.position.z = newPos.z;
+    objeto.position.x = xNorm * 1.5;
+    objeto.position.z = yNorm * -1.5;
 });
 
 /* ROT Y */
@@ -108,7 +96,22 @@ document.querySelector("#moveDown").addEventListener("click", () => {
     objeto.position.y -= 0.2;
 });
 
+/* MOVE LATERAL */
 
+document.querySelector("#moveLeft").addEventListener("click", () => {
+    objeto.rotation.y += THREE.Math.degToRad(3);
+});
+document.querySelector("#moveRight").addEventListener("click", () => {
+    objeto.rotation.y -= THREE.Math.degToRad(3);
+});
+
+/* TILT X */
+document.querySelector("#tiltForward").addEventListener("click", () => {
+    objeto.rotation.x += THREE.Math.degToRad(5);
+});
+document.querySelector("#tiltBackward").addEventListener("click", () => {
+    objeto.rotation.x -= THREE.Math.degToRad(5);
+});
 
 /* ROLL Z */
 document.querySelector("#rollRight").addEventListener("click", () => {
@@ -132,13 +135,21 @@ document.querySelector("#zoomOut").addEventListener("click", () => {
     modelo.setAttribute("scale", { x: scale, y: scale, z: scale });
 });
 
-/* TROCA DE MODELO VIA SELECT */
-document.querySelector("#modelSelect").addEventListener("change", (e) => {
-    const newModelURL = e.target.value;
+/* TROCA DE MODELO */
+const modelButtons = document.querySelectorAll(".model-btn");
 
-    modelo.setAttribute("src", newModelURL);
+modelButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
 
-    objeto.rotation.set(0, THREE.Math.degToRad(-90), 0);
-    objeto.position.set(0, 0, 0);
-    modelo.setAttribute("scale", { x: 2, y: 2, z: 2 });
+        modelButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const newModelURL = btn.dataset.src;
+
+        modelo.setAttribute("src", newModelURL);
+
+        objeto.rotation.set(0, THREE.Math.degToRad(-90), 0);
+        objeto.position.set(0, 0, 0);
+        modelo.setAttribute("scale", { x: 2, y: 2, z: 2 });
+    });
 });

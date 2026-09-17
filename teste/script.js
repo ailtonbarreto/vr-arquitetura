@@ -53,10 +53,10 @@ document.querySelector("#tiltBackward").addEventListener("click", () => {
 
 /* ROLL Z */
 document.querySelector("#rollRight").addEventListener("click", () => {
-    objeto.rotation.z += THREE.Math.degToRad(5);
+    objeto.rotation.z += THREE.Math.degToRad(20);
 });
 document.querySelector("#rollLeft").addEventListener("click", () => {
-    objeto.rotation.z -= THREE.Math.degToRad(5);
+    objeto.rotation.z -= THREE.Math.degToRad(20);
 });
 
 /* ZOOM */
@@ -68,7 +68,7 @@ document.querySelector("#zoomIn").addEventListener("click", () => {
 document.querySelector("#zoomOut").addEventListener("click", () => {
     let scale = modelo.getAttribute("scale").x;
     scale *= 0.85;
-    if (scale < 0.001) scale = 0.001;
+    if (scale < 0.005) scale = 0.005;
     modelo.setAttribute("scale", { x: scale, y: scale, z: scale });
 });
 
@@ -89,4 +89,14 @@ modelButtons.forEach(btn => {
         objeto.rotation.set(0, 0, 0);
         modelo.setAttribute("scale", { x: 1, y: 1, z: 1 });
     });
+});
+
+
+/* MOVER PARA OS LADOS */
+document.querySelector("#moveLeft").addEventListener("click", () => {
+    objeto.position.x -= 0.3;   // move para a esquerda
+});
+
+document.querySelector("#moveRight").addEventListener("click", () => {
+    objeto.position.x += 0.3;   // move para a direita
 });

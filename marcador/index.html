@@ -1,88 +1,90 @@
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+
+    <!-- AR.js com marcador -->
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
-    <link rel="shortcut icon" href="../vr-glasses.ico" type="image/x-icon">
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../menu.css">
+
+    <script src="../menu.js" defer></script>
+    <script src="../hide.js" defer></script>
+
+    <title>AR com Marcador</title>
 </head>
 
-    <style>
+<body style="margin:0; overflow:hidden;">
 
-        *{
-            border: none;
-            margin: 0;
-            padding: 0;
-        }
+    <!-- MENU -->
+    <span class="material-symbols-outlined open-menu" id="open_menu">menu</span>
 
-        body{
-            overflow: hidden;
-        }
+    <nav id="menu">
+        <span class="material-symbols-outlined" id="close_menu">close</span>
 
-        #ui {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            z-index: 9999;
-            background: rgba(0,0,0,0.5);
-            padding: 10px;
-            border-radius: 8px;
-            color: white;
-            font-family: Arial;
-        }
+        <div id="modelButtons">
+            <button class="model-btn" data-src="../construcao/edificio_1.glb">Edifício 1</button>
+            <button class="model-btn" data-src="../construcao/edificio_2.glb">Edifício 2</button>
+            <button class="model-btn" data-src="../construcao/casa_modelo_1.glb">Casa Modelo 1</button>
+            <button class="model-btn" data-src="../construcao/casa_modelo_2.glb">Casa Modelo 2</button>
+            <button class="model-btn" data-src="../construcao/eiffel_tower.glb">Torre Eiffel</button>
+            <button class="model-btn" data-src="../construcao/wtc.glb">World Trade Center</button>
+            <button class="model-btn" data-src="../construcao/Burj_al_arab.glb">Burj Al Arab</button>
+        </div>
+    </nav>
 
-        #ui button, #ui select {
-            margin: 4px;
-            padding: 6px 10px;
-        }
-    </style>
-</head>
+    <!-- CONTROLES -->
+    <div class="controls-zoom">
+        <div class="btn" id="zoomIn">＋</div>
+        <div class="btn" id="zoomOut">－</div>
+    </div>
 
-<body>
+    <div class="controls-bottom">
+        <div class="btn" id="rotateRight">◀️</div>
+        <div class="btn" id="rotateLeft">▶️</div>
+    </div>
 
-<div id="ui">
-    <select id="modelSelect">
-        <option value="../construcao/casa_modelo_1.glb">Casa Modelo 1</option>
-        <option value="../construcao/casa_modelo_2.glb" selected>Casa Modelo 2</option>
-        <option value="../construcao/casa_modelo_3.glb">Casa Modelo 3</option>
-    </select>
-    <br>
+    <div class="controls_rolagem">
+        <div class="btn" id="rollLeft">🔽</div>
+        <div class="btn" id="rollRight">🔼</div>
+    </div>
 
-    <button id="rotateLeft">Rot Y ←</button>
-    <button id="rotateRight">Rot Y →</button>
+    <div class="controls-leftside">
+        <div class="btn" id="tiltForward">🔼</div>
+        <div class="btn" id="tiltBackward">🔽</div>
+    </div>
 
-    <br>
+    <div class="controls-side">
+        <div class="btn" id="moveUp">🔼</div>
+        <div class="btn" id="moveDown">🔽</div>
+    </div>
 
+    <div class="controls-lateral">
+        <div class="btn" id="moveLeft">◀️</div>
+        <div class="btn" id="moveRight">▶️</div>
+    </div>
 
-    <button id="rollLeft">Roll ←</button>
-    <button id="rollRight">Roll →</button>
-    <br>
+    <!-- CENA AR COM MARCADOR -->
+    <a-scene embedded vr-mode-ui="enabled: false"
+        arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;">
 
-    <button id="moveUp">Acima</button>
-    <button id="moveDown">Abaixo</button>
-    <br>
+        <!-- MARCADOR HIRO -->
+        <a-marker type="hiro">
+            <a-entity id="objeto" position="0 0 0" rotation="0 0 0">
+                <a-gltf-model id="modelo" src="" scale="1 1 1"></a-gltf-model>
+            </a-entity>
+        </a-marker>
 
-    <button id="zoomIn">Aumentar</button>
-    <button id="zoomOut">Diminuir</button>
-</div>
+        <a-entity camera></a-entity>
 
-<a-scene vr-mode-ui="enabled: false" embedded
-         arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;">
+    </a-scene>
 
-    <a-marker type="pattern" url="marker.patt">
-        <a-entity id="objeto">
-            <a-gltf-model id="modelo"
-                          src="../construcao/edificio_1.glb" scale="0.0009 0.0009 0.0009" rotation="0 0 0"
-                    position="0 0 0">
-            </a-gltf-model>
-        </a-entity>
-    </a-marker>
-
-    <a-entity camera></a-entity>
-</a-scene>
-
-<script src="app.js"></script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>
