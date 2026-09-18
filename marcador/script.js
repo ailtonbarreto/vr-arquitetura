@@ -99,10 +99,10 @@ document.querySelector("#moveDown").addEventListener("click", () => {
 /* MOVE LATERAL */
 
 document.querySelector("#moveLeft").addEventListener("click", () => {
-    objeto.rotation.y += THREE.Math.degToRad(3);
+    objeto.rotation.y += THREE.Math.degToRad(5);
 });
 document.querySelector("#moveRight").addEventListener("click", () => {
-    objeto.rotation.y -= THREE.Math.degToRad(3);
+    objeto.rotation.y -= THREE.Math.degToRad(5);
 });
 
 /* TILT X */
