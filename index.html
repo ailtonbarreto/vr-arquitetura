@@ -4,56 +4,130 @@
     <meta charset="UTF-8" />
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="menu.css">
-    <script src="menu.js" defer></script>
-    <script src="hide.js" defer></script>
-    <link rel="shortcut icon" href="vr-glasses.ico" type="image/x-icon">
-    <title>VR Autos</title>
+    <link rel="shortcut icon" href="../vr-glasses.ico" type="image/x-icon">
+
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .controls-bottom {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 9999;
+            cursor: pointer;
+        }
+
+        .opcoes {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .controls_rolagem {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 9999;
+            cursor: pointer;
+        }
+
+        .controls-zoom {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 9999;
+            cursor: pointer;
+        }
+
+
+        .controls-side {
+            position: fixed;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 9999;
+            cursor: pointer;
+        }
+
+        .controls-leftside {
+            position: fixed;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 9999;
+            cursor: pointer;
+        }
+
+        .btn {
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 20px;
+            user-select: none;
+            text-align: center;
+        }
+
+        .btn:active {
+            background: rgba(0, 0, 0, 0.9);
+        }
+    </style>
 </head>
 
 <body>
 
-    <span class="material-symbols-outlined open-menu hide" id="open_menu">menu</span>
-
-    <nav id="menu">
-
-        <span class="material-symbols-outlined" id="close_menu">close</span>
+    <div class="opcoes">
 
         <select id="modelSelect">
-
             <option value="">Selecione um modelo</option>
 
-            <option value="./construcao/edificio_1.glb">Edificio 1</option>
-            <option value="./construcao/edificio_2.glb">Edificio 2</option>
-            <option value="./construcao/casa_modelo_1.glb">Casa Modelo 1</option>
-            <option value="./construcao/casa_modelo_2.glb">Casa Modelo 2</option>
-            <option value="./construcao/casa_modelo_3.glb">Casa Modelo 3</option>
+            <option value="./construcao/casa_10x8.glb">Casa 1</option>
+            <option value="./construcao/modelo_de_casa.glb">Casa 2</option>
+            <option value="./construcao/modern_home.glb">Casa 3</option>
             <option value="./construcao/eiffel_tower.glb">Torre Eiffel</option>
-            <option value="./construcao/wtc_3.glb">World Trade Center</option>
-            <option value="./construcao/Burj_al_arab.glb">Burj Al Arab</option>
-  
+            <option value="./construcao/edificio_1.glb">Edifício 1</option>
+            <option value="./construcao/tokyo_otemachi_building.glb">Torre Tokyo Otemachi</option>
+            <option value="./construcao/wtc.glb">World Trade Center</option>
 
         </select>
-
-
-    </nav>
-
-    <div class="controls-zoom hide">
-        <div class="btn" id="zoomIn">＋</div>
-        <div class="btn" id="zoomOut">－</div>
     </div>
 
 
     <!-- Rotação Y -->
-    <div class="controls-bottom hide">
-
+    <div class="controls-bottom">
         <div class="btn" id="rotateRight">◀️</div>
         <div class="btn" id="rotateLeft">▶️</div>
+
     </div>
 
-    <div class="controls_rolagem hide">
+    <div class="controls_rolagem">
 
         <div class="btn" id="rollLeft">🔽</div>
         <div class="btn" id="rollRight">🔼</div>
@@ -62,31 +136,30 @@
 
     <!-- Barra lateral -->
 
-    <div class="controls-leftside hide">
+    <div class="controls-leftside">
         <div class="btn" id="tiltForward">🔼</div>
         <div class="btn" id="tiltBackward">🔽</div>
     </div>
 
-    <div class="controls-side hide">
+    <div class="controls-side">
         <div class="btn" id="moveUp">🔼</div>
         <div class="btn" id="moveDown">🔽</div>
 
     </div>
 
+    <!-- Controle de zoom (canto superior direito) -->
     <div class="controls-zoom">
-        <div class="material-symbols-outlined" id="ocultar">visibility_off</div>
-        <div class="material-symbols-outlined" id="mostrar" style="display: none;">visibility</div>
-
+        <div class="btn" id="zoomIn">＋</div>
+        <div class="btn" id="zoomOut">－</div>
     </div>
 
-    <!----------------------------------------------------------------------------->
 
     <a-scene vr-mode-ui="enabled: false" embedded
         arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;">
 
         <a-entity id="objeto" position="0 1 -4" rotation="0 -90 0">
-
-            <a-gltf-model id="modelo" src="" scale="1 1 1">
+            <!-- <a-gltf-model id="modelo" src="./glb/casa_10x8.glb" scale="0.0008 0.0008 0.0008"> -->
+            <a-gltf-model id="modelo" src="" scale="0.5 0.5 0.5">
 
             </a-gltf-model>
         </a-entity>
@@ -96,46 +169,12 @@
     </a-scene>
 
     <script>
-
         let dragging = false;
         let pinchStartDistance = 0;
-        let initialScale = 2;
+        let initialScale = 0.5;
 
         const objeto = document.querySelector("#objeto").object3D;
         const modelo = document.querySelector("#modelo");
-
-        modelo.addEventListener("model-loaded", () => {
-            // Resetar posição
-            objeto.position.set(0, 1, -4);
-
-            // Resetar rotação
-            objeto.rotation.set(
-                0,
-                THREE.Math.degToRad(-90),
-                0
-            );
-
-            // Resetar escala
-            modelo.setAttribute("scale", { x: 2, y: 2, z: 2 });
-
-            // Ajuste automático baseado no tamanho real do modelo
-            const obj = modelo.getObject3D("mesh");
-            if (!obj) return;
-
-            const box = new THREE.Box3().setFromObject(obj);
-            const size = box.getSize(new THREE.Vector3());
-            const maxDim = Math.max(size.x, size.y, size.z);
-
-            const desiredSize = 3;
-            const scaleFactor = desiredSize / maxDim;
-
-            modelo.setAttribute("scale", {
-                x: scaleFactor,
-                y: scaleFactor,
-                z: scaleFactor
-            });
-        });
-
 
         /* ZOOM */
         function getPinchDistance(e) {
@@ -191,11 +230,11 @@
 
         /* ROT Y */
         document.querySelector("#rotateLeft").addEventListener("click", () => {
-            objeto.rotation.y += THREE.Math.degToRad(5);
+            objeto.rotation.y += THREE.Math.degToRad(10);
         });
 
         document.querySelector("#rotateRight").addEventListener("click", () => {
-            objeto.rotation.y -= THREE.Math.degToRad(5);
+            objeto.rotation.y -= THREE.Math.degToRad(10);
         });
 
         /* MOVE Y */
@@ -209,20 +248,20 @@
 
         /* PITCH (X) */
         document.querySelector("#tiltForward").addEventListener("click", () => {
-            objeto.rotation.x += THREE.Math.degToRad(5);
+            objeto.rotation.x += THREE.Math.degToRad(10);
         });
 
         document.querySelector("#tiltBackward").addEventListener("click", () => {
-            objeto.rotation.x -= THREE.Math.degToRad(5);
+            objeto.rotation.x -= THREE.Math.degToRad(10);
         });
 
         /* ROLL (Z) — ARFAGEM REAL */
         document.querySelector("#rollRight").addEventListener("click", () => {
-            objeto.rotation.z += THREE.Math.degToRad(5);
+            objeto.rotation.z += THREE.Math.degToRad(10);
         });
 
         document.querySelector("#rollLeft").addEventListener("click", () => {
-            objeto.rotation.z -= THREE.Math.degToRad(5);
+            objeto.rotation.z -= THREE.Math.degToRad(10);
         });
 
         /* ZOOM DESKTOP (botões + e -) */
@@ -239,41 +278,15 @@
             modelo.setAttribute("scale", { x: scale, y: scale, z: scale });
         });
 
-
+        /* TROCAR MODELO PELO SELECT */
         document.querySelector("#modelSelect").addEventListener("change", (e) => {
             const newModelURL = e.target.value;
-
-
-            modelo.addEventListener("model-loaded", () => {
-                const obj = modelo.getObject3D("mesh");
-                if (!obj) return;
-
-
-                const box = new THREE.Box3().setFromObject(obj);
-                const size = box.getSize(new THREE.Vector3());
-
-
-                const maxDim = Math.max(size.x, size.y, size.z);
-
-
-                const desiredSize = 3;
-
-                const scaleFactor = desiredSize / maxDim;
-
-
-                modelo.setAttribute("scale", {
-                    x: scaleFactor,
-                    y: scaleFactor,
-                    z: scaleFactor
-                });
-            });
-
 
             // troca o GLB
             modelo.setAttribute("src", newModelURL);
 
             // opcional: resetar escala ao trocar
-            modelo.setAttribute("scale", { x: 2, y: 2, z: 2 });
+            modelo.setAttribute("scale", { x: 0.5, y: 0.5, z: 0.5 });
 
             // opcional: resetar rotação
             objeto.rotation.set(0, -90 * Math.PI / 180, 0);
