@@ -2,20 +2,12 @@
 
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
     <link rel="shortcut icon" href="../vr-glasses.ico" type="image/x-icon">
 
     <style>
-
-        body {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            overflow: hidden;
-            height: 100vh;
-        }
-
         .controls-bottom {
             position: fixed;
             bottom: 20px;
@@ -101,7 +93,7 @@
     </style>
 </head>
 
-<body>
+<body style="margin: 0; overflow: hidden;">
 
     <div class="opcoes">
 
@@ -110,10 +102,9 @@
 
             <option value="./construcao/casa_modelo_1.glb">Casa 1</option>
             <option value="./construcao/casa_modelo_2.glb">Casa 2</option>
-            <option value="./construcao/modern_home.glb">Casa 3</option>
             <option value="./construcao/eiffel_tower.glb">Torre Eiffel</option>
             <option value="./construcao/edificio_1.glb">Edifício 1</option>
-            <option value="./construcao/edificio_2.glb">Torre Tokyo Otemachi</option>
+            <option value="./construcao/edificio_2.glb">Edificio 2</option>
             <option value="./construcao/wtc.glb">World Trade Center</option>
 
         </select>
