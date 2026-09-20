@@ -46,8 +46,8 @@
     <!-- Rotação Y -->
     <div class="controls-bottom hide">
 
-        <div class="btn" id="rotateRight">◀️</div>
-        <div class="btn" id="rotateLeft">▶️</div>
+        <div class="btn" id="rotateRight">◀1</div>
+        <div class="btn" id="rotateLeft">▶️2</div>
     </div>
 
     <div class="controls_rolagem hide">
@@ -60,7 +60,7 @@
     <!-- Barra lateral -->
 
     <div class="controls-leftside hide">
-        <div class="btn" id="tiltForward">a</div>
+        <div class="btn" id="tiltForward">🔼</div>
         <div class="btn" id="tiltBackward">🔽</div>
     </div>
 
@@ -78,14 +78,18 @@
 
     <!----------------------------------------------------------------------------->
 
-    <a-scene vr-mode-ui="enabled: false" embedded>
+    <a-scene renderer="logarithmicDepthBuffer: true">
 
-        <a-entity id="objeto" position="0 1 -4" rotation="0 -90 0">
+
+
+        <a-entity id="objeto" position="0 1 -4" rotation="0 -90 0" static-body>
             <a-gltf-model id="modelo" src="" scale="1 1 1"></a-gltf-model>
         </a-entity>
 
+
         <!-- CÂMERA CORRIGIDA -->
-        <a-camera look-controls="touchEnabled: true; magicWindowTrackingEnabled: true"></a-camera>
+        <a-camera look-controls="touchEnabled: true; magicWindowTrackingEnabled: false"></a-camera>
+
 
     </a-scene>
 
