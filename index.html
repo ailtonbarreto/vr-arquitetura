@@ -35,6 +35,8 @@
 
     </nav>
 
+
+
     <div class="controls-zoom hide">
         <div class="btn" id="zoomIn">＋</div>
         <div class="btn" id="zoomOut">－</div>
@@ -76,7 +78,7 @@
 
     <!----------------------------------------------------------------------------->
 
-    <a-scene vr-mode-ui="enabled: false" embedded
+    <a-scene vr-mode-ui="enabled: true" embedded
         arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;">
 
         <a-entity id="objeto" position="0 1 -4" rotation="0 -90 0">
@@ -91,7 +93,6 @@
     </a-scene>
 
     <script>
-
         let dragging = false;
         let pinchStartDistance = 0;
         let initialScale = 2;
@@ -100,17 +101,14 @@
         const modelo = document.querySelector("#modelo");
 
         modelo.addEventListener("model-loaded", () => {
+
             // Resetar posição
             objeto.position.set(0, 1, -4);
 
             // Resetar rotação
-            objeto.rotation.set(
-                0,
-                THREE.Math.degToRad(-90),
-                0
-            );
+            objeto.rotation.set(0, THREE.Math.degToRad(-90), 0);
 
-            // Resetar escala
+            // Resetar escala inicial
             modelo.setAttribute("scale", { x: 2, y: 2, z: 2 });
 
             // Ajuste automático baseado no tamanho real do modelo
@@ -131,8 +129,7 @@
             });
         });
 
-
-        /* ZOOM */
+        /* ZOOM TOUCH */
         function getPinchDistance(e) {
             const dx = e.touches[0].clientX - e.touches[1].clientX;
             const dy = e.touches[0].clientY - e.touches[1].clientY;
@@ -186,69 +183,74 @@
 
         /* ROT Y */
         document.querySelector("#rotateLeft").addEventListener("click", () => {
-            objeto.rotation.y += THREE.Math.degToRad(5);
+            objeto.rotation.y += THREE.Math.degToRad(3);
         });
-
         document.querySelector("#rotateRight").addEventListener("click", () => {
-            objeto.rotation.y -= THREE.Math.degToRad(5);
+            objeto.rotation.y -= THREE.Math.degToRad(3);
         });
 
         /* MOVE Y */
         document.querySelector("#moveUp").addEventListener("click", () => {
-            objeto.position.y += 0.2;
+            objeto.position.y += 0.1;
         });
-
         document.querySelector("#moveDown").addEventListener("click", () => {
-            objeto.position.y -= 0.2;
+            objeto.position.y -= 0.1;
         });
 
-        /* PITCH (X) */
+        /* PITCH X */
         document.querySelector("#tiltForward").addEventListener("click", () => {
-            objeto.rotation.x += THREE.Math.degToRad(5);
+            objeto.rotation.x += THREE.Math.degToRad(3);
         });
-
         document.querySelector("#tiltBackward").addEventListener("click", () => {
-            objeto.rotation.x -= THREE.Math.degToRad(5);
+            objeto.rotation.x -= THREE.Math.degToRad(3);
         });
 
-        /* ROLL (Z) — ARFAGEM REAL */
+        /* ROLL Z */
         document.querySelector("#rollRight").addEventListener("click", () => {
-            objeto.rotation.z += THREE.Math.degToRad(5);
+            objeto.rotation.z += THREE.Math.degToRad(3);
         });
-
         document.querySelector("#rollLeft").addEventListener("click", () => {
-            objeto.rotation.z -= THREE.Math.degToRad(5);
+            objeto.rotation.z -= THREE.Math.degToRad(3);
         });
 
-        /* ZOOM DESKTOP (botões + e -) */
+        /* ZOOM DESKTOP */
         document.querySelector("#zoomIn").addEventListener("click", () => {
             let scale = modelo.getAttribute("scale").x;
-            scale += scale * 0.15; // aumenta 15%
+            scale += scale * 0.15;
             modelo.setAttribute("scale", { x: scale, y: scale, z: scale });
         });
 
         document.querySelector("#zoomOut").addEventListener("click", () => {
             let scale = modelo.getAttribute("scale").x;
-            scale -= scale * 0.15; // diminui 15%
-            if (scale < 0.0001) scale = 0.0001; // limite mínimo
+            scale -= scale * 0.15;
+            if (scale < 0.0001) scale = 0.0001;
             modelo.setAttribute("scale", { x: scale, y: scale, z: scale });
         });
 
+        /* BOTÕES DE MODELO */
         const modelButtons = document.querySelectorAll(".model-btn");
 
         modelButtons.forEach(btn => {
             btn.addEventListener("click", () => {
+
+                // Remove active de todos
+                modelButtons.forEach(b => b.classList.remove("active"));
+
+                // Adiciona active ao botão clicado
+                btn.classList.add("active");
+
+                // Pega o src do botão
                 const newModelURL = btn.dataset.src;
 
+                // Troca o GLB
                 modelo.setAttribute("src", newModelURL);
 
+                // Resetar transformações
                 objeto.rotation.set(0, THREE.Math.degToRad(-90), 0);
                 objeto.position.set(0, 1, -4);
                 modelo.setAttribute("scale", { x: 2, y: 2, z: 2 });
             });
         });
-
-
 
     </script>
 
