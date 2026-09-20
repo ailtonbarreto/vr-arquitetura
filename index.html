@@ -56,7 +56,7 @@
     </div>
 
     <div class="controls-side hide">
-        <div class="btn" id="moveUp">🔼</div>
+        <div class="btn" id="moveUp">🔼ss</div>
         <div class="btn" id="moveDown">🔽</div>
     </div>
 
@@ -67,21 +67,22 @@
 
     <!----------------------------------------------------------------------------->
 
-<a-scene vr-mode-ui="enabled: false" embedded>
+    <a-scene renderer="logarithmicDepthBuffer: true" embedded>
 
-    <!-- LUZ PARA O MODELO APARECER -->
-    <a-entity light="type: ambient; intensity: 1"></a-entity>
-    <a-entity light="type: directional; intensity: 1" position="1 1 1"></a-entity>
+        <!-- LUZ PARA NÃO FICAR TELA BRANCA -->
+        <a-entity light="type: ambient; intensity: 1"></a-entity>
+        <a-entity light="type: directional; intensity: 1" position="1 1 1"></a-entity>
 
-    <!-- OBJETO FIXO NO AMBIENTE -->
-    <a-entity id="objeto" position="0 1 -4" rotation="0 -90 0">
-        <a-gltf-model id="modelo" src="" scale="1 1 1"></a-gltf-model>
-    </a-entity>
+        <!-- OBJETO FIXO NO AMBIENTE -->
+        <a-entity id="objeto" position="0 1 -4" rotation="0 -90 0">
+            <a-gltf-model id="modelo" src="" scale="1 1 1"></a-gltf-model>
+        </a-entity>
 
-    <!-- CÂMERA DO CELULAR FUNCIONANDO -->
-    <a-camera look-controls="touchEnabled: true; magicWindowTrackingEnabled: true"></a-camera>
+        <!-- CÂMERA DO CELULAR FUNCIONANDO -->
+        <a-camera look-controls="touchEnabled: true; magicWindowTrackingEnabled: true"></a-camera>
 
-</a-scene>
+    </a-scene>
+
 
 
     <script>
