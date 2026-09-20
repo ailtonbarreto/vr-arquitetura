@@ -4,20 +4,20 @@
 
 <head>
 
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <!-- A-FRAME -->
+    <!-- A-Frame -->
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+
+    <!-- WebXR -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.min.js"></script>
 
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
         rel="stylesheet"
-    >
+    />
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="menu.css">
@@ -25,11 +25,7 @@
     <script src="menu.js" defer></script>
     <script src="hide.js" defer></script>
 
-    <link
-        rel="shortcut icon"
-        href="vr-glasses.ico"
-        type="image/x-icon"
-    >
+    <link rel="shortcut icon" href="vr-glasses.ico" type="image/x-icon">
 
     <title>VR Arquitetura</title>
 
@@ -37,15 +33,11 @@
 
 <body>
 
-
-    <!-- ========================================================= -->
     <!-- MENU -->
-    <!-- ========================================================= -->
 
     <span
         class="material-symbols-outlined open-menu hide"
-        id="open_menu"
-    >
+        id="open_menu">
         menu
     </span>
 
@@ -54,8 +46,7 @@
 
         <span
             class="material-symbols-outlined"
-            id="close_menu"
-        >
+            id="close_menu">
             close
         </span>
 
@@ -64,56 +55,43 @@
 
             <button
                 class="model-btn"
-                data-src="./construcao/edificio_1.glb"
-            >
+                data-src="./construcao/edificio_1.glb">
                 Edifício 1
             </button>
 
-
             <button
                 class="model-btn"
-                data-src="./construcao/edificio_2.glb"
-            >
+                data-src="./construcao/edificio_2.glb">
                 Edifício 2
             </button>
 
-
             <button
                 class="model-btn"
-                data-src="./construcao/casa_modelo_1.glb"
-            >
+                data-src="./construcao/casa_modelo_1.glb">
                 Casa Modelo 1
             </button>
 
-
             <button
                 class="model-btn"
-                data-src="./construcao/casa_modelo_2.glb"
-            >
+                data-src="./construcao/casa_modelo_2.glb">
                 Casa Modelo 2
             </button>
 
-
             <button
                 class="model-btn"
-                data-src="./construcao/eiffel_tower.glb"
-            >
+                data-src="./construcao/eiffel_tower.glb">
                 Torre Eiffel
             </button>
 
-
             <button
                 class="model-btn"
-                data-src="./construcao/wtc.glb"
-            >
+                data-src="./construcao/wtc.glb">
                 World Trade Center
             </button>
 
-
             <button
                 class="model-btn"
-                data-src="./construcao/Burj_al_arab.glb"
-            >
+                data-src="./construcao/Burj_al_arab.glb">
                 Burj Al Arab
             </button>
 
@@ -122,167 +100,130 @@
     </nav>
 
 
-
-    <!-- ========================================================= -->
     <!-- ZOOM -->
-    <!-- ========================================================= -->
 
     <div class="controls-zoom hide">
 
         <div
             class="btn"
-            id="zoomIn"
-        >
+            id="zoomIn">
             ＋
         </div>
 
-
         <div
             class="btn"
-            id="zoomOut"
-        >
+            id="zoomOut">
             －
         </div>
 
     </div>
 
 
-
-    <!-- ========================================================= -->
     <!-- ROTAÇÃO Y -->
-    <!-- ========================================================= -->
 
     <div class="controls-bottom hide">
 
         <div
             class="btn"
-            id="rotateRight"
-        >
+            id="rotateRight">
             ◀️
         </div>
 
-
         <div
             class="btn"
-            id="rotateLeft"
-        >
+            id="rotateLeft">
             ▶️
         </div>
 
     </div>
 
 
-
-    <!-- ========================================================= -->
     <!-- ROTAÇÃO Z -->
-    <!-- ========================================================= -->
 
     <div class="controls_rolagem hide">
 
         <div
             class="btn"
-            id="rollLeft"
-        >
+            id="rollLeft">
             🔽
         </div>
 
-
         <div
             class="btn"
-            id="rollRight"
-        >
+            id="rollRight">
             🔼
         </div>
 
     </div>
 
 
-
-    <!-- ========================================================= -->
     <!-- INCLINAÇÃO X -->
-    <!-- ========================================================= -->
 
     <div class="controls-leftside hide">
 
         <div
             class="btn"
-            id="tiltForward"
-        >
+            id="tiltForward">
             🔼
         </div>
 
-
         <div
             class="btn"
-            id="tiltBackward"
-        >
+            id="tiltBackward">
             🔽
         </div>
 
     </div>
 
 
-
-    <!-- ========================================================= -->
-    <!-- MOVIMENTO Y -->
-    <!-- ========================================================= -->
+    <!-- MOVIMENTO VERTICAL -->
 
     <div class="controls-side hide">
 
         <div
             class="btn"
-            id="moveUp"
-        >
+            id="moveUp">
             🔼
         </div>
 
-
         <div
             class="btn"
-            id="moveDown"
-        >
+            id="moveDown">
             🔽
         </div>
 
     </div>
 
 
-
-    <!-- ========================================================= -->
     <!-- MOSTRAR / OCULTAR -->
-    <!-- ========================================================= -->
 
     <div class="controls-zoom">
 
         <div
             class="material-symbols-outlined"
-            id="ocultar"
-        >
+            id="ocultar">
             visibility_off
         </div>
-
 
         <div
             class="material-symbols-outlined"
             id="mostrar"
-            style="display: none;"
-        >
+            style="display: none;">
             visibility
         </div>
 
     </div>
 
 
-
     <!-- ========================================================= -->
-    <!-- BOTÃO AR -->
+    <!-- BOTÃO PARA ENTRAR NO AR -->
     <!-- ========================================================= -->
 
     <button
         id="startAR"
         style="
             position: fixed;
-            z-index: 99999;
+            z-index: 9999;
             left: 50%;
             bottom: 30px;
             transform: translateX(-50%);
@@ -292,15 +233,16 @@
             background: #2086EB;
             color: white;
             font-size: 16px;
-        "
-    >
+            cursor: pointer;
+        ">
+
         Iniciar realidade aumentada
+
     </button>
 
 
-
     <!-- ========================================================= -->
-    <!-- BOTÃO COLOCAR -->
+    <!-- BOTÃO PARA COLOCAR O MODELO -->
     <!-- ========================================================= -->
 
     <button
@@ -308,7 +250,7 @@
         style="
             display: none;
             position: fixed;
-            z-index: 99999;
+            z-index: 9999;
             left: 50%;
             bottom: 30px;
             transform: translateX(-50%);
@@ -318,78 +260,62 @@
             background: #06A95D;
             color: white;
             font-size: 16px;
-        "
-    >
-        Colocar modelo
+            cursor: pointer;
+        ">
+
+        Colocar modelo aqui
+
     </button>
 
 
-
     <!-- ========================================================= -->
-    <!-- A-FRAME -->
+    <!-- CENA A-FRAME -->
     <!-- ========================================================= -->
 
     <a-scene
         id="scene"
-
         vr-mode-ui="enabled: false"
-
         renderer="
             colorManagement: true;
             physicallyCorrectLights: true;
             antialias: true;
         "
-
+        embedded
         webxr="
             optionalFeatures:
-            hit-test,
-            local-floor,
+            hit-test;
             dom-overlay;
+            local-floor;
         "
     >
 
 
-        <!-- ===================================================== -->
         <!-- MODELO -->
-        <!-- ===================================================== -->
 
         <a-entity
             id="objeto"
             visible="false"
             position="0 0 -2"
-            rotation="0 0 0"
-        >
+            rotation="0 0 0">
 
             <a-gltf-model
                 id="modelo"
-                src="./construcao/edificio_1.glb"
-                scale="1 1 1"
-            >
+                src=""
+                scale="1 1 1">
             </a-gltf-model>
 
         </a-entity>
 
 
-        <!-- ===================================================== -->
         <!-- CÂMERA -->
-        <!-- ===================================================== -->
 
         <a-camera
             id="camera"
-            position="0 1.6 0"
-        >
+            position="0 1.6 0">
         </a-camera>
 
 
-        <!-- LUZ -->
-        <a-light
-            type="ambient"
-            intensity="1.5"
-        ></a-light>
-
-
     </a-scene>
-
 
 
     <!-- ========================================================= -->
@@ -398,290 +324,235 @@
 
     <script>
 
-
         /* =========================================================
-           ELEMENTOS
+           VARIÁVEIS
         ========================================================= */
 
-        const scene =
-            document.querySelector("#scene");
+        const scene = document.querySelector("#scene");
 
+        const objeto = document.querySelector("#objeto");
 
-        const objeto =
-            document.querySelector("#objeto");
+        const modelo = document.querySelector("#modelo");
 
+        const camera = document.querySelector("#camera");
 
-        const modelo =
-            document.querySelector("#modelo");
+        const startAR = document.querySelector("#startAR");
 
+        const placeObject = document.querySelector("#placeObject");
 
-        const camera =
-            document.querySelector("#camera");
-
-
-        const startAR =
-            document.querySelector("#startAR");
-
-
-        const placeObject =
-            document.querySelector("#placeObject");
-
-
-        /* =========================================================
-           ESTADO
-        ========================================================= */
 
         let xrSession = null;
 
         let hitTestSource = null;
 
-        let viewerSpace = null;
-
-        let referenceSpace = null;
+        let localReferenceSpace = null;
 
         let objetoColocado = false;
 
-        let ultimaPose = null;
+        let modeloCarregado = false;
 
 
         let initialScale = 1;
 
         let pinchStartDistance = 0;
 
+        let dragging = false;
 
 
         /* =========================================================
            VERIFICAR WEBXR
         ========================================================= */
 
-        async function verificarAR() {
+        async function verificarWebXR() {
 
             if (!navigator.xr) {
 
                 alert(
-                    "Este navegador não possui suporte ao WebXR."
+                    "Este navegador não oferece suporte ao WebXR."
                 );
 
                 return false;
             }
 
 
-            try {
-
-                const suportado =
-                    await navigator.xr.isSessionSupported(
-                        "immersive-ar"
-                    );
+            const suportado =
+                await navigator.xr.isSessionSupported(
+                    "immersive-ar"
+                );
 
 
-                if (!suportado) {
+            if (!suportado) {
 
-                    alert(
-                        "Este dispositivo não suporta realidade aumentada espacial."
-                    );
-
-                    return false;
-                }
-
-
-                return true;
-
-            }
-            catch (erro) {
-
-                console.error(erro);
+                alert(
+                    "Este dispositivo ou navegador não suporta AR espacial."
+                );
 
                 return false;
-
             }
 
-        }
 
+            return true;
+
+        }
 
 
         /* =========================================================
            INICIAR AR
         ========================================================= */
 
-        startAR.addEventListener(
-            "click",
-            async () => {
+        startAR.addEventListener("click", async () => {
 
-                const suportado =
-                    await verificarAR();
+            const suportado = await verificarWebXR();
 
-
-                if (!suportado) return;
+            if (!suportado) return;
 
 
-                try {
+            try {
 
-                    xrSession =
-                        await navigator.xr.requestSession(
-                            "immersive-ar",
-                            {
-                                requiredFeatures: [
-                                    "hit-test"
-                                ],
+                xrSession =
+                    await navigator.xr.requestSession(
+                        "immersive-ar",
+                        {
+                            requiredFeatures: [
+                                "hit-test"
+                            ],
 
-                                optionalFeatures: [
-                                    "local-floor",
-                                    "dom-overlay"
-                                ],
+                            optionalFeatures: [
+                                "local-floor",
+                                "dom-overlay"
+                            ],
 
-                                domOverlay: {
-                                    root: document.body
-                                }
+                            domOverlay: {
+                                root: document.body
                             }
-                        );
-
-
-                    /*
-                     * Entrega a sessão XR para o A-FRAME.
-                     */
-
-                    await scene.renderer.xr.setSession(
-                        xrSession
-                    );
-
-
-                    /*
-                     * Espaço do mundo.
-                     */
-
-                    referenceSpace =
-                        await xrSession.requestReferenceSpace(
-                            "local"
-                        );
-
-
-                    /*
-                     * Espaço da câmera.
-                     */
-
-                    viewerSpace =
-                        await xrSession.requestReferenceSpace(
-                            "viewer"
-                        );
-
-
-                    /*
-                     * Fonte do HIT TEST.
-                     */
-
-                    hitTestSource =
-                        await xrSession.requestHitTestSource({
-                            space: viewerSpace
-                        });
-
-
-                    startAR.style.display =
-                        "none";
-
-
-                    placeObject.style.display =
-                        "block";
-
-
-                    /*
-                     * Sessão terminou.
-                     */
-
-                    xrSession.addEventListener(
-                        "end",
-                        () => {
-
-                            xrSession = null;
-
-                            hitTestSource = null;
-
-                            viewerSpace = null;
-
-                            referenceSpace = null;
-
-                            objetoColocado = false;
-
-                            ultimaPose = null;
-
-                            startAR.style.display =
-                                "block";
-
-                            placeObject.style.display =
-                                "none";
 
                         }
                     );
 
 
-                    /*
-                     * Escuta os frames do WebXR.
-                     */
+                startAR.style.display = "none";
 
-                    scene.renderer.xr.setAnimationLoop(
-                        atualizarAR
+                placeObject.style.display = "block";
+
+
+                /* -------------------------------------------------
+                   A-FRAME ENTRA NA SESSÃO XR
+                ------------------------------------------------- */
+
+                scene.renderer.xr.setSession(
+                    xrSession
+                );
+
+
+                /* -------------------------------------------------
+                   ESPAÇO DE REFERÊNCIA
+                ------------------------------------------------- */
+
+                localReferenceSpace =
+                    await xrSession.requestReferenceSpace(
+                        "local"
                     );
 
 
-                }
-                catch (erro) {
+                /* -------------------------------------------------
+                   HIT TEST
+                ------------------------------------------------- */
 
-                    console.error(
-                        "Erro ao iniciar AR:",
-                        erro
+                const viewerSpace =
+                    await xrSession.requestReferenceSpace(
+                        "viewer"
                     );
 
 
-                    alert(
-                        "Não foi possível iniciar a realidade aumentada."
-                    );
+                hitTestSource =
+                    await xrSession.requestHitTestSource({
+                        space: viewerSpace
+                    });
 
-                }
+
+                /* -------------------------------------------------
+                   FINALIZAR SESSÃO
+                ------------------------------------------------- */
+
+                xrSession.addEventListener(
+                    "end",
+                    () => {
+
+                        xrSession = null;
+
+                        hitTestSource = null;
+
+                        objetoColocado = false;
+
+                        startAR.style.display = "block";
+
+                        placeObject.style.display = "none";
+
+                    }
+                );
+
+
+                /* -------------------------------------------------
+                   LOOP XR
+                ------------------------------------------------- */
+
+                scene.renderer.setAnimationLoop(
+                    renderXR
+                );
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao iniciar AR:",
+                    erro
+                );
+
+                alert(
+                    "Não foi possível iniciar a realidade aumentada."
+                );
 
             }
-        );
 
+        });
 
 
         /* =========================================================
-           ATUALIZAÇÃO DO AR
+           LOOP DO AR
         ========================================================= */
 
-        function atualizarAR(
+        function renderXR(
             timestamp,
             frame
         ) {
 
+            if (!frame || !xrSession) return;
+
+
+            const referenceSpace =
+                localReferenceSpace;
+
+
+            /* -----------------------------------------------------
+               PROCURAR SUPERFÍCIE
+            ----------------------------------------------------- */
+
             if (
-                !frame ||
-                !xrSession ||
-                !referenceSpace ||
-                !hitTestSource
+                hitTestSource &&
+                !objetoColocado
             ) {
 
-                return;
-
-            }
-
-
-            /*
-             * Procuramos uma superfície somente enquanto
-             * o objeto ainda NÃO foi colocado.
-             */
-
-            if (!objetoColocado) {
-
-                const resultados =
+                const hitTestResults =
                     frame.getHitTestResults(
                         hitTestSource
                     );
 
 
                 if (
-                    resultados.length > 0
+                    hitTestResults.length > 0
                 ) {
 
                     const hit =
-                        resultados[0];
+                        hitTestResults[0];
 
 
                     const pose =
@@ -693,11 +564,11 @@
                     if (pose) {
 
                         /*
-                         * Guardamos a última posição
-                         * encontrada.
+                         * Aqui NÃO colocamos o objeto.
+                         *
+                         * Apenas mostramos uma posição
+                         * provisória no centro do ambiente.
                          */
-
-                        ultimaPose = pose;
 
                     }
 
@@ -705,22 +576,34 @@
 
             }
 
+
+            /* -----------------------------------------------------
+               RENDER
+            ----------------------------------------------------- */
+
+            scene.renderer.render(
+                scene.object3D,
+                camera.object3D
+            );
+
         }
 
 
-
         /* =========================================================
-           COLOCAR OBJETO
+           COLOCAR MODELO NO MUNDO
         ========================================================= */
 
         placeObject.addEventListener(
             "click",
-            () => {
+            async () => {
 
-                if (!ultimaPose) {
+                if (!xrSession) return;
+
+
+                if (!hitTestSource) {
 
                     alert(
-                        "Aponte a câmera para uma superfície."
+                        "Não foi detectada nenhuma superfície."
                     );
 
                     return;
@@ -729,28 +612,70 @@
 
 
                 /*
-                 * Pegamos a posição detectada.
+                 * Pega o frame atual.
                  */
 
+                const frame =
+                    scene.renderer.xr.getFrame();
+
+
+                if (!frame) {
+
+                    return;
+
+                }
+
+
+                const results =
+                    frame.getHitTestResults(
+                        hitTestSource
+                    );
+
+
+                if (results.length === 0) {
+
+                    alert(
+                        "Aponte o celular para uma superfície."
+                    );
+
+                    return;
+
+                }
+
+
+                const hit =
+                    results[0];
+
+
+                const pose =
+                    hit.getPose(
+                        localReferenceSpace
+                    );
+
+
+                if (!pose) return;
+
+
+                /* -------------------------------------------------
+                   POSIÇÃO NO MUNDO REAL
+                ------------------------------------------------- */
+
                 const position =
-                    ultimaPose.transform.position;
+                    pose.transform.position;
 
 
                 const orientation =
-                    ultimaPose.transform.orientation;
+                    pose.transform.orientation;
 
 
                 /*
-                 * =================================================
-                 * AQUI ESTÁ O PONTO MAIS IMPORTANTE
-                 * =================================================
+                 * IMPORTANTE:
                  *
-                 * A posição é definida UMA ÚNICA VEZ.
+                 * A posição abaixo é aplicada UMA ÚNICA VEZ.
                  *
-                 * Depois que objetoColocado = true,
-                 * atualizarAR() NÃO modifica mais a posição.
+                 * Depois disso não alteramos mais a posição
+                 * do objeto quando a câmera se movimenta.
                  */
-
 
                 objeto.object3D.position.set(
                     position.x,
@@ -767,35 +692,26 @@
                 );
 
 
-                /*
-                 * Modelo aparece.
-                 */
-
                 objeto.setAttribute(
                     "visible",
-                    "true"
+                    true
                 );
 
 
                 objetoColocado = true;
 
 
-                /*
-                 * Não precisamos mais do botão.
-                 */
-
                 placeObject.style.display =
                     "none";
 
 
                 console.log(
-                    "Objeto fixado no mundo:",
+                    "Modelo colocado no mundo:",
                     position
                 );
 
             }
         );
-
 
 
         /* =========================================================
@@ -806,27 +722,30 @@
             "model-loaded",
             () => {
 
-                const mesh =
+                modeloCarregado = true;
+
+
+                const obj =
                     modelo.getObject3D(
                         "mesh"
                     );
 
 
-                if (!mesh) return;
+                if (!obj) return;
 
 
-                /*
-                 * Calcula tamanho.
-                 */
+                /* -------------------------------------------------
+                   CALCULAR TAMANHO DO MODELO
+                ------------------------------------------------- */
 
                 const box =
-                    new AFRAME.THREE.Box3()
-                        .setFromObject(mesh);
+                    new THREE.Box3()
+                        .setFromObject(obj);
 
 
                 const size =
                     box.getSize(
-                        new AFRAME.THREE.Vector3()
+                        new THREE.Vector3()
                     );
 
 
@@ -837,6 +756,10 @@
                         size.z
                     );
 
+
+                /*
+                 * Tamanho desejado
+                 */
 
                 const desiredSize = 3;
 
@@ -862,9 +785,8 @@
         );
 
 
-
         /* =========================================================
-           PINCH
+           ZOOM TOUCH
         ========================================================= */
 
         function getPinchDistance(e) {
@@ -885,7 +807,6 @@
             );
 
         }
-
 
 
         window.addEventListener(
@@ -914,39 +835,32 @@
         );
 
 
-
         window.addEventListener(
             "touchmove",
             e => {
 
                 if (
                     e.touches.length !== 2
-                ) {
-
-                    return;
-
-                }
+                ) return;
 
 
-                const distancia =
+                const pinchDistance =
                     getPinchDistance(e);
 
 
-                const fator =
-                    distancia /
+                const scaleFactor =
+                    pinchDistance /
                     pinchStartDistance;
 
 
-                let novaEscala =
+                let newScale =
                     initialScale *
-                    fator;
+                    scaleFactor;
 
 
-                if (
-                    novaEscala < 0.0001
-                ) {
+                if (newScale < 0.0001) {
 
-                    novaEscala = 0.0001;
+                    newScale = 0.0001;
 
                 }
 
@@ -954,9 +868,9 @@
                 modelo.setAttribute(
                     "scale",
                     {
-                        x: novaEscala,
-                        y: novaEscala,
-                        z: novaEscala
+                        x: newScale,
+                        y: newScale,
+                        z: newScale
                     }
                 );
 
@@ -965,7 +879,6 @@
                 passive: true
             }
         );
-
 
 
         /* =========================================================
@@ -979,7 +892,7 @@
                 () => {
 
                     objeto.object3D.rotation.y +=
-                        AFRAME.THREE.MathUtils.degToRad(3);
+                        THREE.MathUtils.degToRad(3);
 
                 }
             );
@@ -992,11 +905,10 @@
                 () => {
 
                     objeto.object3D.rotation.y -=
-                        AFRAME.THREE.MathUtils.degToRad(3);
+                        THREE.MathUtils.degToRad(3);
 
                 }
             );
-
 
 
         /* =========================================================
@@ -1029,7 +941,6 @@
             );
 
 
-
         /* =========================================================
            PITCH X
         ========================================================= */
@@ -1041,7 +952,7 @@
                 () => {
 
                     objeto.object3D.rotation.x +=
-                        AFRAME.THREE.MathUtils.degToRad(3);
+                        THREE.MathUtils.degToRad(3);
 
                 }
             );
@@ -1054,11 +965,10 @@
                 () => {
 
                     objeto.object3D.rotation.x -=
-                        AFRAME.THREE.MathUtils.degToRad(3);
+                        THREE.MathUtils.degToRad(3);
 
                 }
             );
-
 
 
         /* =========================================================
@@ -1072,7 +982,7 @@
                 () => {
 
                     objeto.object3D.rotation.z +=
-                        AFRAME.THREE.MathUtils.degToRad(3);
+                        THREE.MathUtils.degToRad(3);
 
                 }
             );
@@ -1085,15 +995,14 @@
                 () => {
 
                     objeto.object3D.rotation.z -=
-                        AFRAME.THREE.MathUtils.degToRad(3);
+                        THREE.MathUtils.degToRad(3);
 
                 }
             );
 
 
-
         /* =========================================================
-           ZOOM IN
+           ZOOM
         ========================================================= */
 
         document
@@ -1124,11 +1033,6 @@
                 }
             );
 
-
-
-        /* =========================================================
-           ZOOM OUT
-        ========================================================= */
 
         document
             .querySelector("#zoomOut")
@@ -1168,9 +1072,8 @@
             );
 
 
-
         /* =========================================================
-           TROCAR MODELO
+           SELEÇÃO DOS MODELOS
         ========================================================= */
 
         const modelButtons =
@@ -1186,6 +1089,10 @@
                     "click",
                     () => {
 
+                        /* -----------------------------------------
+                           ACTIVE
+                        ----------------------------------------- */
+
                         modelButtons.forEach(
                             b =>
                                 b.classList.remove(
@@ -1199,20 +1106,56 @@
                         );
 
 
-                        const src =
+                        /* -----------------------------------------
+                           URL
+                        ----------------------------------------- */
+
+                        const newModelURL =
                             btn.dataset.src;
 
 
+                        /* -----------------------------------------
+                           CARREGAR
+                        ----------------------------------------- */
+
                         modelo.setAttribute(
                             "src",
-                            src
+                            newModelURL
                         );
 
+
+                        /*
+                         * IMPORTANTE:
+                         *
+                         * NÃO resetamos a posição.
+                         *
+                         * O novo modelo ocupa exatamente
+                         * o mesmo lugar do modelo anterior.
+                         */
+
+
+                        objetoColocado = true;
+
+
+                        objeto.setAttribute(
+                            "visible",
+                            true
+                        );
 
                     }
                 );
 
             }
+        );
+
+
+        /* =========================================================
+           MODELO INICIAL
+        ========================================================= */
+
+        modelo.setAttribute(
+            "src",
+            "./construcao/edificio_1.glb"
         );
 
 
