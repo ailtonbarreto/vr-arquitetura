@@ -46,8 +46,8 @@
     <!-- Rotação Y -->
     <div class="controls-bottom hide">
 
-        <div class="btn" id="rotateRight">◀1</div>
-        <div class="btn" id="rotateLeft">▶️2</div>
+        <div class="btn" id="rotateRight">◀️</div>
+        <div class="btn" id="rotateLeft">▶️</div>
     </div>
 
     <div class="controls_rolagem hide">
@@ -78,8 +78,8 @@
 
     <!----------------------------------------------------------------------------->
 
-    <a-scene renderer="logarithmicDepthBuffer: true">
-
+    <a-scene vr-mode-ui="enabled: false" embedded arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+>
 
 
         <a-entity id="objeto" position="0 1 -4" rotation="0 -90 0" static-body>
@@ -88,8 +88,7 @@
 
 
         <!-- CÂMERA CORRIGIDA -->
-        <a-camera look-controls="touchEnabled: true; magicWindowTrackingEnabled: false"></a-camera>
-
+        <a-camera look-controls="touchEnabled: true; magicWindowTrackingEnabled: true"></a-camera>
 
     </a-scene>
 
