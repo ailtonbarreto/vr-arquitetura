@@ -85,7 +85,7 @@ body {
 #ocultar,
 #mostrar {
     position: fixed;
-    left: 15px;
+    right: 15px;
     bottom: 15px;
     transform: translateY(-50%);
     display: flex;

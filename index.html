@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="menu.css">
@@ -18,11 +19,9 @@
     <span class="material-symbols-outlined open-menu hide" id="open_menu">menu</span>
 
     <nav id="menu">
-
         <span class="material-symbols-outlined" id="close_menu">close</span>
 
         <div id="modelButtons">
-
             <button class="model-btn" data-src="./construcao/edificio_1.glb">Edifício 1</button>
             <button class="model-btn" data-src="./construcao/edificio_2.glb">Edifício 2</button>
             <button class="model-btn" data-src="./construcao/casa_modelo_1.glb">Casa Modelo 1</button>
@@ -30,34 +29,24 @@
             <button class="model-btn" data-src="./construcao/eiffel_tower.glb">Torre Eiffel</button>
             <button class="model-btn" data-src="./construcao/wtc.glb">World Trade Center</button>
             <button class="model-btn" data-src="./construcao/Burj_al_arab.glb">Burj Al Arab</button>
-
         </div>
-
     </nav>
 
-
-
+    <!-- TODOS OS CONTROLES ORIGINAIS -->
     <div class="controls-zoom hide">
         <div class="btn" id="zoomIn">＋</div>
         <div class="btn" id="zoomOut">－</div>
     </div>
 
-
-    <!-- Rotação Y -->
     <div class="controls-bottom hide">
-
         <div class="btn" id="rotateRight">◀️</div>
         <div class="btn" id="rotateLeft">▶️</div>
     </div>
 
     <div class="controls_rolagem hide">
-
         <div class="btn" id="rollLeft">🔽</div>
         <div class="btn" id="rollRight">🔼</div>
-
     </div>
-
-    <!-- Barra lateral -->
 
     <div class="controls-leftside hide">
         <div class="btn" id="tiltForward">🔼</div>
@@ -67,27 +56,22 @@
     <div class="controls-side hide">
         <div class="btn" id="moveUp">🔼</div>
         <div class="btn" id="moveDown">🔽</div>
-
     </div>
 
     <div class="controls-zoom">
         <div class="material-symbols-outlined" id="ocultar">visibility_off</div>
         <div class="material-symbols-outlined" id="mostrar" style="display: none;">visibility</div>
-
     </div>
 
     <!----------------------------------------------------------------------------->
-<a-scene
-    vr-mode-ui="enabled: false"
-    embedded
-    arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false; performanceMode: true;"
->
+    <a-scene
+        vr-mode-ui="enabled: false"
+        embedded
+        arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;"
+    >
 
         <a-entity id="objeto" position="0 1 -4" rotation="0 -90 0">
-
-            <a-gltf-model id="modelo" src="" scale="1 1 1">
-
-            </a-gltf-model>
+            <a-gltf-model id="modelo" src="" scale="1 1 1"></a-gltf-model>
         </a-entity>
 
         <a-camera></a-camera>
@@ -103,17 +87,10 @@
         const modelo = document.querySelector("#modelo");
 
         modelo.addEventListener("model-loaded", () => {
-
-            // Resetar posição
             objeto.position.set(0, 1, -4);
-
-            // Resetar rotação
             objeto.rotation.set(0, THREE.Math.degToRad(-90), 0);
-
-            // Resetar escala inicial
             modelo.setAttribute("scale", { x: 2, y: 2, z: 2 });
 
-            // Ajuste automático baseado no tamanho real do modelo
             const obj = modelo.getObject3D("mesh");
             if (!obj) return;
 
@@ -150,7 +127,6 @@
         window.addEventListener("touchend", () => dragging = false);
 
         window.addEventListener("touchmove", e => {
-
             if (e.touches.length === 2) {
                 const pinchDistance = getPinchDistance(e);
                 const scaleFactor = pinchDistance / pinchStartDistance;
@@ -164,23 +140,6 @@
 
                 return;
             }
-
-            if (!dragging || e.touches.length !== 1) return;
-
-            const touch = e.touches[0];
-            const xNorm = (touch.clientX / window.innerWidth) * 2 - 1;
-
-            const camera = document.querySelector("a-camera").object3D;
-
-            const vector = new THREE.Vector3(xNorm, 0, -1);
-            vector.unproject(camera);
-
-            const distance = 3;
-            const dir = vector.sub(camera.position).normalize();
-            const newPos = camera.position.clone().add(dir.multiplyScalar(distance));
-
-            objeto.position.x = newPos.x;
-            objeto.position.z = newPos.z;
         });
 
         /* ROT Y */
@@ -234,20 +193,12 @@
 
         modelButtons.forEach(btn => {
             btn.addEventListener("click", () => {
-
-                // Remove active de todos
                 modelButtons.forEach(b => b.classList.remove("active"));
-
-                // Adiciona active ao botão clicado
                 btn.classList.add("active");
 
-                // Pega o src do botão
                 const newModelURL = btn.dataset.src;
-
-                // Troca o GLB
                 modelo.setAttribute("src", newModelURL);
 
-                // Resetar transformações
                 objeto.rotation.set(0, THREE.Math.degToRad(-90), 0);
                 objeto.position.set(0, 1, -4);
                 modelo.setAttribute("scale", { x: 2, y: 2, z: 2 });
