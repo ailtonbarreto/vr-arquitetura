@@ -169,15 +169,6 @@
 
             const camera = document.querySelector("a-camera").object3D;
 
-            const vector = new THREE.Vector3(xNorm, 0, -1);
-            vector.unproject(camera);
-
-            const distance = 3;
-            const dir = vector.sub(camera.position).normalize();
-            const newPos = camera.position.clone().add(dir.multiplyScalar(distance));
-
-            objeto.position.x = newPos.x;
-            objeto.position.z = newPos.z;
         });
 
         /* ROT Y */
