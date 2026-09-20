@@ -77,8 +77,11 @@
     </div>
 
     <!----------------------------------------------------------------------------->
-
-    <a-scene vr-mode-ui="enabled: true" embedded arjs="sourceType: webcam; trackingMethod: best; disableAutoRotate: true;">
+<a-scene
+    vr-mode-ui="enabled: false"
+    embedded
+    arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false; performanceMode: true;"
+>
 
         <a-entity id="objeto" position="0 1 -4" rotation="0 -90 0">
 
