@@ -4,9 +4,12 @@ let initialScale = 2;
 
 const objeto = document.querySelector("#objeto").object3D;
 const modelo = document.querySelector("#modelo");
+const spinner = document.getElementById("loadingSpinner");
 
-/* AUTO AJUSTE AO CARREGAR MODELO */
+
 modelo.addEventListener("model-loaded", () => {
+
+    spinner.classList.add("esconder");
 
     objeto.position.set(0, 0, 0);
     objeto.rotation.set(0, THREE.Math.degToRad(-90), 0);
@@ -30,14 +33,14 @@ modelo.addEventListener("model-loaded", () => {
     });
 });
 
-/* FUNÇÃO DE DISTÂNCIA DO PINCH */
+
 function getPinchDistance(e) {
     const dx = e.touches[0].clientX - e.touches[1].clientX;
     const dy = e.touches[0].clientY - e.touches[1].clientY;
     return Math.sqrt(dx * dx + dy * dy);
 }
 
-/* TOUCH START */
+
 window.addEventListener("touchstart", e => {
     if (e.touches.length === 2) {
         pinchStartDistance = getPinchDistance(e);
@@ -47,13 +50,13 @@ window.addEventListener("touchstart", e => {
     }
 });
 
-/* TOUCH END */
+
 window.addEventListener("touchend", () => dragging = false);
 
-/* TOUCH MOVE */
+
 window.addEventListener("touchmove", e => {
 
-    // PINCH ZOOM
+
     if (e.touches.length === 2) {
         const pinchDistance = getPinchDistance(e);
         const scaleFactor = pinchDistance / pinchStartDistance;
@@ -68,7 +71,7 @@ window.addEventListener("touchmove", e => {
         return;
     }
 
-    // DRAG COM UM DEDO (MOVER NO MARCADOR)
+  
     if (!dragging || e.touches.length !== 1) return;
 
     const touch = e.touches[0];
@@ -97,7 +100,6 @@ document.querySelector("#moveDown").addEventListener("click", () => {
 });
 
 /* MOVE LATERAL */
-
 document.querySelector("#moveLeft").addEventListener("click", () => {
     objeto.rotation.y += THREE.Math.degToRad(5);
 });
@@ -135,11 +137,13 @@ document.querySelector("#zoomOut").addEventListener("click", () => {
     modelo.setAttribute("scale", { x: scale, y: scale, z: scale });
 });
 
-/* TROCA DE MODELO */
+
 const modelButtons = document.querySelectorAll(".model-btn");
 
 modelButtons.forEach(btn => {
     btn.addEventListener("click", () => {
+
+         spinner.classList.remove("esconder");
 
         modelButtons.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
@@ -153,4 +157,3 @@ modelButtons.forEach(btn => {
         modelo.setAttribute("scale", { x: 2, y: 2, z: 2 });
     });
 });
-
