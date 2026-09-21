@@ -13,53 +13,88 @@
     <title>VR Arquitetura</title>
 </head>
 
-<body> <span class="material-symbols-outlined open-menu hide" id="open_menu">menu</span>
+<body>
+
+    <span class="material-symbols-outlined open-menu hide" id="open_menu">menu</span>
+
+
     <nav id="menu"> <span class="material-symbols-outlined" id="close_menu">close</span>
-        <div id="modelButtons"> <button class="model-btn" data-src="./construcao/edificio_1.glb">Edifício 1</button>
-            <button class="model-btn" data-src="./construcao/edificio_2.glb">Edifício 2</button> <button
-                class="model-btn" data-src="./construcao/casa_modelo_1.glb">Casa Modelo 1</button> <button
-                class="model-btn" data-src="./construcao/casa_modelo_2.glb">Casa Modelo 2</button> <button
-                class="model-btn" data-src="./construcao/eiffel_tower.glb">Torre Eiffel</button> <button
-                class="model-btn" data-src="./construcao/wtc.glb">World Trade Center</button> <button class="model-btn"
-                data-src="./construcao/Burj_al_arab.glb">Burj Al Arab</button>
+
+        <div id="modelButtons">
+
+            <button class="model-btn" data-src="./construcao/edificio_1.glb">Edifício 1</button>
+            <button class="model-btn" data-src="./construcao/edificio_2.glb">Edifício 2</button>
+            <button class="model-btn" data-src="./construcao/projeto_estrutural.glb">Projeto Estrutural</button>
+            <button class="model-btn" data-src="./construcao/casa_modelo_1.glb">Casa Modelo 1</button>
+            <button class="model-btn" data-src="./construcao/casa_modelo_2.glb">Casa Modelo 2</button>
+            <button class="model-btn" data-src="./construcao/modelo_casa_concreto.glb">Casa Modelo 3</button>
+            <button class="model-btn" data-src="./construcao/eiffel_tower.glb">Torre Eiffel</button>
+            <button class="model-btn" data-src="./construcao/wtc.glb">World Trade Center</button>
+            <button class="model-btn" data-src="./construcao/Burj_al_arab.glb">Burj Al Arab</button>
+
         </div>
     </nav>
+
     <div class="controls-zoom hide">
+
         <div class="btn" id="zoomIn">＋</div>
         <div class="btn" id="zoomOut">－</div>
+
     </div> <!-- Rotação Y -->
+
     <div class="controls-bottom hide">
+
         <div class="btn" id="rotateRight">◀️</div>
         <div class="btn" id="rotateLeft">▶️</div>
+
     </div>
+
     <div class="controls_rolagem hide">
+
         <div class="btn" id="rollLeft">🔽</div>
         <div class="btn" id="rollRight">🔼</div>
+
     </div> <!-- Barra lateral -->
+
     <div class="controls-leftside hide">
+
         <div class="btn" id="tiltForward">🔼</div>
         <div class="btn" id="tiltBackward">🔽</div>
+
     </div>
+
     <div class="controls-side hide">
+
         <div class="btn" id="moveUp">🔼</div>
         <div class="btn" id="moveDown">🔽</div>
+
     </div>
+
     <div class="controls-zoom">
         <div class="material-symbols-outlined" id="ocultar">visibility_off</div>
         <div class="material-symbols-outlined" id="mostrar" style="display: none;">visibility</div>
     </div>
-    
-    
-    <a-scene
-        vr-mode-ui="enabled: false" embedded arjs="sourceType: webcam; trackingMethod: best; disableAutoRotate: true;">
-        <a-entity id="objeto" position="0 1 -4" rotation="0 -90 0"> <a-gltf-model id="modelo" src="" scale="1 1 1">
-            </a-gltf-model> </a-entity> <a-camera></a-camera>
-        </a-scene>
+
+
+    <a-scene vr-mode-ui="enabled: false" embedded
+        arjs="sourceType: webcam; trackingMethod: best; disableAutoRotate: true;">
+
+        <a-entity id="objeto" position="0 1 -4" rotation="0 -90 0">
+
+            <a-gltf-model id="modelo" src="" scale="1 1 1">
+
+            </a-gltf-model>
+
+        </a-entity>
+
+        <a-camera></a-camera>
+
+    </a-scene>
 
 
     <script>
 
-        
+
         let dragging = false;
         let pinchStartDistance = 0;
         let initialScale = 2;
@@ -67,15 +102,15 @@
         const objeto = document.querySelector("#objeto").object3D;
         const modelo = document.querySelector("#modelo");
 
-          modelo.addEventListener("model-loaded", () => {
+        modelo.addEventListener("model-loaded", () => {
 
-                  objeto.position.set(0, 1, -4);
+            objeto.position.set(0, 1, -4);
 
             objeto.rotation.set(0, THREE.Math.degToRad(-90), 0);
 
-                modelo.setAttribute("scale", { x: 2, y: 2, z: 2 });
+            modelo.setAttribute("scale", { x: 2, y: 2, z: 2 });
 
-                   const obj = modelo.getObject3D("mesh");
+            const obj = modelo.getObject3D("mesh");
             if (!obj) return;
 
             const box = new THREE.Box3().setFromObject(obj);
@@ -150,21 +185,21 @@
             objeto.rotation.y -= THREE.Math.degToRad(3);
         });
 
-          document.querySelector("#moveUp").addEventListener("click", () => {
+        document.querySelector("#moveUp").addEventListener("click", () => {
             objeto.position.y += 0.1;
         });
         document.querySelector("#moveDown").addEventListener("click", () => {
             objeto.position.y -= 0.1;
         });
 
-            document.querySelector("#tiltForward").addEventListener("click", () => {
+        document.querySelector("#tiltForward").addEventListener("click", () => {
             objeto.rotation.x += THREE.Math.degToRad(3);
         });
         document.querySelector("#tiltBackward").addEventListener("click", () => {
             objeto.rotation.x -= THREE.Math.degToRad(3);
         });
 
-            document.querySelector("#rollRight").addEventListener("click", () => {
+        document.querySelector("#rollRight").addEventListener("click", () => {
             objeto.rotation.z += THREE.Math.degToRad(3);
         });
         document.querySelector("#rollLeft").addEventListener("click", () => {
@@ -194,8 +229,8 @@
 
                 btn.classList.add("active");
 
-                            const newModelURL = btn.dataset.src;
-          
+                const newModelURL = btn.dataset.src;
+
                 modelo.setAttribute("src", newModelURL);
 
                 objeto.rotation.set(0, THREE.Math.degToRad(-90), 0);

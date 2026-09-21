@@ -20,8 +20,9 @@
 
 <body style="margin:0; overflow:hidden;">
 
+
     <!-- MENU -->
-    <span class="material-symbols-outlined open-menu" id="open_menu">menu</span>
+    <span class="material-symbols-outlined open-menu hide" id="open_menu">menu</span>
 
     <nav id="menu">
         <span class="material-symbols-outlined" id="close_menu">close</span>
@@ -29,8 +30,10 @@
         <div id="modelButtons">
             <button class="model-btn" data-src="../construcao/edificio_1.glb">Edifício 1</button>
             <button class="model-btn" data-src="../construcao/edificio_2.glb">Edifício 2</button>
+            <button class="model-btn" data-src="../construcao/projeto_estrutural.glb">Projeto Estrutural</button>
             <button class="model-btn" data-src="../construcao/casa_modelo_1.glb">Casa Modelo 1</button>
             <button class="model-btn" data-src="../construcao/casa_modelo_2.glb">Casa Modelo 2</button>
+            <button class="model-btn" data-src="../construcao/modelo_casa_concreto.glb">Casa Modelo 3</button>
             <button class="model-btn" data-src="../construcao/eiffel_tower.glb">Torre Eiffel</button>
             <button class="model-btn" data-src="../construcao/wtc.glb">World Trade Center</button>
             <button class="model-btn" data-src="../construcao/Burj_al_arab.glb">Burj Al Arab</button>
@@ -38,34 +41,39 @@
     </nav>
 
     <!-- CONTROLES -->
-    <div class="controls-zoom">
+    <div class="controls-zoom hide">
         <div class="btn" id="zoomIn">＋</div>
         <div class="btn" id="zoomOut">－</div>
     </div>
 
-    <div class="controls-bottom">
+    <div class="controls-bottom hide">
         <div class="btn" id="rotateRight">◀️</div>
         <div class="btn" id="rotateLeft">▶️</div>
     </div>
 
-    <div class="controls_rolagem">
+    <div class="controls_rolagem hide">
         <div class="btn" id="rollLeft">🔽</div>
         <div class="btn" id="rollRight">🔼</div>
     </div>
 
-    <div class="controls-leftside">
+    <div class="controls-leftside hide">
         <div class="btn" id="tiltForward">🔼</div>
         <div class="btn" id="tiltBackward">🔽</div>
     </div>
 
-    <div class="controls-side">
+    <div class="controls-side hide">
         <div class="btn" id="moveUp">🔼</div>
         <div class="btn" id="moveDown">🔽</div>
     </div>
 
-    <div class="controls-lateral">
+    <div class="controls-lateral hide">
         <div class="btn" id="moveLeft">◀️</div>
         <div class="btn" id="moveRight">▶️</div>
+    </div>
+
+    <div class="controls-zoom">
+        <div class="material-symbols-outlined" id="ocultar">visibility_off</div>
+        <div class="material-symbols-outlined" id="mostrar" style="display: none;">visibility</div>
     </div>
 
     <!-- CENA AR COM MARCADOR -->
