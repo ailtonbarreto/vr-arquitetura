@@ -15,8 +15,9 @@
 
 <body>
 
-    <span class="material-symbols-outlined open-menu hide" id="open_menu">menu</span>
+    <div id="loadingSpinner" class="spinner esconder"></div>
 
+    <span class="material-symbols-outlined open-menu hide" id="open_menu">menu</span>
 
     <nav id="menu"> <span class="material-symbols-outlined" id="close_menu">close</span>
 
@@ -78,8 +79,9 @@
     </div>
 
 
-    <a-scene vr-mode-ui="enabled: false" embedded
-        arjs="sourceType: webcam; trackingMethod: best; disableAutoRotate: true;">
+    <a-scene vr-mode-ui="enabled: true" embedded smooth="true" smoothCount="10" smoothTolerance="0.01" arjs="sourceType: webcam; trackingMethod: best; disableAutoRotate: true;">
+    <!-- <a-scene vr-mode-ui="enabled: false" embedded arjs="sourceType: webcam; trackingMethod: best; disableAutoRotate: true;"> -->
+
 
         <a-entity id="objeto" position="0 1 -4" rotation="0 -90 0">
 
@@ -100,11 +102,14 @@
         let dragging = false;
         let pinchStartDistance = 0;
         let initialScale = 2;
+        const spinner = document.getElementById("loadingSpinner");
 
         const objeto = document.querySelector("#objeto").object3D;
         const modelo = document.querySelector("#modelo");
 
         modelo.addEventListener("model-loaded", () => {
+
+            spinner.classList.add("esconder");
 
             objeto.position.set(0, 1, -4);
 
@@ -226,6 +231,8 @@
 
         modelButtons.forEach(btn => {
             btn.addEventListener("click", () => {
+
+                spinner.classList.remove("esconder");
 
                 modelButtons.forEach(b => b.classList.remove("active"));
 

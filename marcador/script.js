@@ -143,7 +143,7 @@ const modelButtons = document.querySelectorAll(".model-btn");
 modelButtons.forEach(btn => {
     btn.addEventListener("click", () => {
 
-         spinner.classList.remove("esconder");
+        spinner.classList.remove("esconder");
 
         modelButtons.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
