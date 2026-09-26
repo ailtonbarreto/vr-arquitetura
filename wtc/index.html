@@ -31,9 +31,9 @@
     </a-scene>
 
     <script>
-        // Função para calcular distância entre duas coordenadas (Haversine)
+       
         function calcularDistancia(lat1, lon1, lat2, lon2) {
-            const R = 6371e3; // raio da Terra em metros
+            const R = 6371e3;
             const toRad = x => x * Math.PI / 180;
 
             const dLat = toRad(lat2 - lat1);
@@ -46,10 +46,9 @@
 
             const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-            return R * c; // distância em metros
+            return R * c;
         }
 
-        // Atualiza distância sempre que o GPS muda
         window.addEventListener('gps-camera-update-position', e => {
             const userLat = e.detail.position.latitude;
             const userLon = e.detail.position.longitude;
